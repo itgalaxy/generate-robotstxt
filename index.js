@@ -1,4 +1,5 @@
 'use strict';
+var path = require('path');
 var fs = require('fs');
 var lodash = require('lodash');
 var crypto = require('crypto');
@@ -15,7 +16,7 @@ function robotstxt(options, callback) {
         crawlDelay: null,
         host: null,
         cleanParam: null,
-        dest: './'
+        dest: process.cwd()
     });
 
     var addLine = function (name, rule) {
@@ -66,13 +67,13 @@ function robotstxt(options, callback) {
             contents += addLine('Clean-param', options.cleanParam);
         }
 
-        fs.writeFile(options.dest + 'robots.txt', contents, function (error) {
-            if (error) {
-                throw error;
-            }
-
+        fs.writeFile(path.join(options.dest, 'robots.txt'), contents, function (error) {
             if (callback) {
-                callback(contents);
+                callback(error, contents);
+            } else {
+                if (error) {
+                    throw error;
+                }
             }
         });
     })();
