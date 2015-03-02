@@ -72,7 +72,7 @@ function robotstxt(options, callback) {
                 callback(error, contents);
             } else {
                 if (error) {
-                    throw error;
+                    throw new Error(error);
                 }
             }
         });

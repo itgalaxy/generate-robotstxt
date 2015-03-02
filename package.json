@@ -1,6 +1,6 @@
 {
     "name": "generate-robotstxt",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Generate robots.txt file for node js and middleware for express/connect framework",
     "license": "MIT",
     "repository": "itgalaxy-company/generate-robotstxt",
