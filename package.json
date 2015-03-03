@@ -1,6 +1,6 @@
 {
     "name": "generate-robotstxt",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "Generate robots.txt file for node js and middleware for express/connect framework",
     "license": "MIT",
     "repository": "itgalaxy-company/generate-robotstxt",
@@ -23,6 +23,6 @@
         "express"
     ],
     "dependencies": {
-        "lodash": "~2.4.1"
+        "lodash": "~3.4.0"
     }
 }
