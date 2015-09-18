@@ -1,8 +1,8 @@
 'use strict';
+
 var path = require('path');
 var fs = require('fs');
 var lodash = require('lodash');
-var crypto = require('crypto');
 
 function robotstxt(options, callback) {
     options = lodash.defaults(options || {}, {
@@ -16,14 +16,32 @@ function robotstxt(options, callback) {
         crawlDelay: null,
         host: null,
         cleanParam: null,
-        dest: process.cwd()
+        dest: null
     });
 
-    var addLine = function (name, rule) {
+    if (typeof callback !== 'function') {
+        throw new Error('Callback must be function');
+    }
+
+    if (Array.isArray(options.host)) {
+        throw new Error('Options Host must be one in robots.txt');
+    }
+
+    if (typeof options.dest !== 'string' && options.dest !== null) {
+        throw new Error('Destination must be string or null');
+    }
+
+    function capitaliseFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
+    function addLine(name, rule) {
         var contents = '';
+
         if (Object.prototype.toString.call(name) === '[object Object]') {
-            Object.keys(name).forEach(function(key) {
+            Object.keys(name).forEach(function (key) {
                 var value = name[key];
+
                 contents += addLine(key, value);
             });
         } else if (rule && Object.prototype.toString.call(rule) === '[object Array]') {
@@ -31,16 +49,13 @@ function robotstxt(options, callback) {
                 contents += addLine(name, item);
             });
         } else {
-            contents += capitaliseFirstLetter(name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()) + ': ' + rule + '\n';
+            contents += capitaliseFirstLetter(name.replace(/([a-z])([A-Z])/g, '$1-$2')
+                    .toLowerCase()) + ': ' + rule + '\n';
         }
         return contents;
-    };
+    }
 
-    var capitaliseFirstLetter = function (string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    };
-
-    return (function() {
+    return (function () {
         var contents = '';
 
         options.policy.forEach(function (item) {
@@ -59,7 +74,7 @@ function robotstxt(options, callback) {
             if (typeof options.crawDelay === 'number' && isFinite(options.crawDelay)) {
                 contents += addLine('Crawl-delay', options.crawDelay);
             } else {
-                throw new Error('gulp-robotstxt', 'Options Craw-delay must be integer or float');
+                throw new Error('Options Craw-delay must be integer or float');
             }
         }
 
@@ -67,52 +82,18 @@ function robotstxt(options, callback) {
             contents += addLine('Clean-param', options.cleanParam);
         }
 
-        fs.writeFile(path.join(options.dest, 'robots.txt'), contents, function (error) {
-            if (callback) {
-                callback(error, contents);
-            } else {
+        if (options.dest) {
+            fs.writeFile(path.join(options.dest, 'robots.txt'), contents, function (error) {
                 if (error) {
-                    throw new Error(error);
+                    return callback(error);
                 }
-            }
-        });
+
+                return callback(null, contents);
+            });
+        } else {
+            return callback(null, contents);
+        }
     })();
 }
-
-function middleware(path, options) {
-    options = lodash.defaults(options || {}, {
-        path: 'robots.txt',
-        cache: true,
-        cacheMaxAge: 86400000
-    });
-
-    var robotstxt = fs.readFileSync(path);
-    if (!robotstxt) {
-        throw new Error('No path provided for robots.txt file');
-    }
-
-    if (options.cache) {
-        var maxAge = options.cacheMaxAge;
-        var headers = {
-            'Content-Type': 'text/plain',
-            'Content-Length': robotstxt.length,
-            'ETag': '"' + crypto.createHash('md5').update(robotstxt).digest('hex') + '"',
-            'Cache-Control': 'public, max-age=' + (maxAge / 1000)
-        };
-    }
-
-    return function middleware(req, res, next) {
-        if ('/robots.txt' === req.url) {
-            if (options.cache) {
-                res.writeHead(200, headers);
-            }
-            res.end(robotstxt);
-        } else {
-            return next();
-        }
-    };
-}
-
-module.exports.middleware = middleware;
 
 module.exports = robotstxt;

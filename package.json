@@ -1,11 +1,11 @@
 {
     "name": "generate-robotstxt",
-    "version": "1.0.3",
-    "description": "Generate robots.txt file for node js and middleware for express/connect framework",
-    "license": "MIT",
+    "version": "2.0.0",
+    "homepage": "http://itgalaxy.company",
+    "description": "Awesome generator robots.txt",
     "repository": "itgalaxy-company/generate-robotstxt",
     "author": {
-        "name": "Alexander Krasnoyarov",
+        "name": "Your node.jsjs programmers",
         "email": "info@itgalaxy.company",
         "url": "http://itgalaxy.company"
     },
@@ -18,11 +18,24 @@
         "generate",
         "robots-txt",
         "user-agent",
-        "police",
-        "middleware",
-        "express"
+        "police"
     ],
+    "scripts": {
+        "lint": "eslint index.js test",
+        "test": "npm run-script lint && mocha --reporter spec",
+        "coveralls": "istanbul cover _mocha --report lcovonly -- -R spec && rm -rf ./coverage"
+    },
     "dependencies": {
-        "lodash": "~3.4.0"
-    }
+        "lodash": "~3.10.0"
+    },
+    "devDependencies": {
+        "mocha": "~2.3.0",
+        "should": "~7.1.0",
+        "eslint" : "~1.4.3",
+        "istanbul": "~0.3.0"
+    },
+    "engines": {
+        "node": ">= 0.10"
+    },
+    "license": "MIT"
 }
