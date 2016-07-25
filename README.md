@@ -13,7 +13,7 @@ npm install generate-robotstxt
 ## Usage
 
 ```javascripts
-var robotstxt = require('generate-robotstxt')
+const robotstxt = require('generate-robotstxt')
 
 // Pass in the absolute path to your robots.txt file
 robotstxt({
