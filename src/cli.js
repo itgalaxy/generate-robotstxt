@@ -10,14 +10,7 @@ const cli = meow(`
     Usage
         $ generate-robotstxt [options] <dest>
     Options
-       --config  Path to a specific configuration file (JSON, YAML, or CommonJS),
-                 or the name of a module in \`node_modules\` that points to one.
-                 If no \`--config\` argument is provided, generate-robotstxt will search for
-                 configuration  files in the following places, in this order:
-                    - a \`robotstxt\` property in \`package.json\`
-                    - a \`.robotstxtrc\` file (with or without filename extension:
-                        \`.json\`, \`.yaml\`, and \`.js\` are available)
-                    - a \`robotstxt.config.js\` file exporting a JS object
+       --config  Path to a specific configuration file.
 
 `, {
     string: [
