@@ -1,7 +1,4 @@
-# EditorConfig helps developers define and maintain consistent
-# coding styles between different editors and IDEs
 # editorconfig.org
-
 root = true
 
 [*]
@@ -13,20 +10,5 @@ trim_trailing_whitespace = true
 insert_final_newline = true
 
 [*.md]
+indent_size = 2
 trim_trailing_whitespace = false
-insert_final_newline = false
-
-[*.xml]
-insert_final_newline = false
-
-[*.json]
-insert_final_newline = false
-
-[*.txt]
-insert_final_newline = false
-
-[*.svg]
-insert_final_newline = false
-
-[*.gitignore]
-insert_final_newline = false
