@@ -1,3 +1,8 @@
+# Head
+
+- Chore(package): update a minimal version of `npm-run-all` from `2.3.0` to `3.0.0`.
+- Chore(package): update a minimal version of `nyc` from `7.0.0` to `8.0.0`.
+
 # 4.0.0
 
 - Removed: `crawlDelay` from `options`.
