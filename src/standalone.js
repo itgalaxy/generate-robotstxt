@@ -5,13 +5,7 @@ function capitaliseFirstLetter(string) {
 function addLine(name, rule) {
     let contents = '';
 
-    if (Object.prototype.toString.call(name) === '[object Object]') {
-        Object.keys(name).forEach((key) => {
-            const value = name[key];
-
-            contents += addLine(key, value);
-        });
-    } else if (rule && Object.prototype.toString.call(rule) === '[object Array]') {
+    if (rule && Object.prototype.toString.call(rule) === '[object Array]') {
         rule.forEach((item) => {
             contents += addLine(name, item);
         });
@@ -25,27 +19,23 @@ function addLine(name, rule) {
 export default function ({
     configFile = null,
     policy = [{
-        userAgent: '*',
-        allow: '/'
+        allow: '/',
+        cleanParam: null,
+        crawlDelay: null,
+        userAgent: '*'
     }],
     sitemap = null,
-    crawlDelay = null,
-    host = null,
-    cleanParam = null
+    host = null
 } = {}) {
     let options = {
-        policy,
-        sitemap,
-        crawlDelay,
         host,
-        cleanParam
+        policy,
+        sitemap
     };
 
-    let starter = null;
+    let starter = Promise.resolve();
 
-    if (!configFile) {
-        starter = Promise.resolve();
-    } else {
+    if (configFile) {
         starter = new Promise((resolve) => {
             const optionsFromConfigFile = require(configFile); // eslint-disable-line global-require
 
@@ -64,21 +54,50 @@ export default function ({
     return starter
         .then(() => new Promise((resolve, reject) => {
             if (!Array.isArray(options.policy)) {
-                return reject(new Error('Options `policy` must be array'));
+                return reject(new Error('Options "policy" must be array'));
             }
 
             if (Array.isArray(host)) {
-                return reject(new Error('Options `host` must be one'));
-            }
-
-            if (typeof options.crawlDelay !== 'number' && !isFinite(options.crawlDelay)) {
-                return reject(new Error('Options `crawlDelay` must be integer or float'));
+                return reject(new Error('Options "host" must be one'));
             }
 
             let contents = '';
+            let counter = 0;
 
             options.policy.forEach((item) => {
-                contents += addLine(item);
+                if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
+                    return reject(new Error('Each "police" should have "User-agent"'));
+                }
+
+                contents += addLine('User-agent', item.userAgent);
+
+                if (item.allow) {
+                    contents += addLine('Allow', item.allow);
+                }
+
+                if (item.disallow) {
+                    contents += addLine('Disallow', item.disallow);
+                }
+
+                if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
+                    return reject(new Error('Options "crawlDelay" must be integer or float'));
+                }
+
+                if (item.crawlDelay) {
+                    contents += addLine('Crawl-delay', item.crawlDelay);
+                }
+
+                if (item.cleanParam) {
+                    contents += addLine('Clean-param', item.cleanParam);
+                }
+
+                counter++;
+
+                if (counter !== options.policy.length) {
+                    contents += '\n';
+                }
+
+                return item;
             });
 
             if (options.sitemap) {
@@ -87,14 +106,6 @@ export default function ({
 
             if (options.host) {
                 contents += addLine('Host', options.host);
-            }
-
-            if (options.crawlDelay) {
-                contents += addLine('Crawl-delay', options.crawlDelay);
-            }
-
-            if (options.cleanParam) {
-                contents += addLine('Clean-param', options.cleanParam);
             }
 
             return resolve(contents);

@@ -13,15 +13,15 @@ const cli = meow(`
        --config  Path to a specific configuration file.
 
 `, {
-    string: [
-        'config'
-    ],
     alias: {
         /* eslint-disable id-length */
         h: 'help',
         v: 'version'
         /* eslint-enable id-length */
-    }
+    },
+    string: [
+        'config'
+    ]
 });
 
 const optionsBase = {};
@@ -38,7 +38,7 @@ if (cli.flags.config) {
 }
 
 if (cli.input.length === 0) {
-    throw new Error('Require `destination` argument');
+    throw new Error('Require `dest` argument');
 }
 
 Promise
