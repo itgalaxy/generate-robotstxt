@@ -37,7 +37,8 @@ export default function ({
 
     if (configFile) {
         starter = new Promise((resolve) => {
-            const optionsFromConfigFile = require(configFile); // eslint-disable-line global-require
+            // eslint-disable-next-line global-require, import/no-dynamic-require
+            const optionsFromConfigFile = require(configFile);
 
             options = Object.assign(
                 {},

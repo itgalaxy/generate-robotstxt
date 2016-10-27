@@ -1,6 +1,13 @@
 # generate-robotstxt
 
-[![NPM version](https://img.shields.io/npm/v/generate-robotstxt.svg)](https://www.npmjs.org/package/generate-robotstxt) [![Travis Build Status](https://img.shields.io/travis/itgalaxy/generate-robotstxt/master.svg?label=build)](https://travis-ci.org/itgalaxy/generate-robotstxt) [![dependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/status.svg)](https://david-dm.org/itgalaxy/generate-robotstxt) [![devDependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/dev-status.svg)](https://david-dm.org/itgalaxy/generate-robotstxt?type=dev)
+[![NPM version](https://img.shields.io/npm/v/generate-robotstxt.svg)](
+https://www.npmjs.org/package/generate-robotstxt) 
+[![Travis Build Status](https://img.shields.io/travis/itgalaxy/generate-robotstxt/master.svg?label=build)](
+https://travis-ci.org/itgalaxy/generate-robotstxt) 
+[![dependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/status.svg)](
+https://david-dm.org/itgalaxy/generate-robotstxt) 
+[![devDependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/dev-status.svg)](
+https://david-dm.org/itgalaxy/generate-robotstxt?type=dev)
 
 Awesome generator robots.txt.
 
@@ -13,7 +20,7 @@ npm install generate-robotstxt
 ## Usage
 
 ```js
-const robotstxt = require('generate-robotstxt')
+const robotstxt = require('generate-robotstxt').default;
 
 // Pass in the absolute path to your robots.txt file
 robotstxt({
@@ -21,15 +28,15 @@ robotstxt({
         {
             userAgent: 'Googlebot',
             allow: '/',
-            disallow: '/search'
+            disallow: '/search',
             crawlDelay: 2
         },
         {
             userAgent: '*',
             allow: '/',
-            disallow: '/search'
+            disallow: '/search',
             crawlDelay: 10,
-            cleanParam: 'ref /articles/',
+            cleanParam: 'ref /articles/'
         }
     ],
     sitemap: 'sitemap.xml',
@@ -39,6 +46,10 @@ robotstxt({
     console.log(content);
   });
 ```
+
+## Contribution
+
+Feel free to push your code if you agree with publishing under the MIT license.
 
 ## [Changelog](CHANGELOG.md)
 

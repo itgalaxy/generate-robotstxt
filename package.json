@@ -36,6 +36,7 @@
         "resolve-from": "^2.0.0"
     },
     "devDependencies": {
+        "ajv-cli": "~1.1.0",
         "ava": "^0.16.0",
         "babel-cli": "^6.10.0",
         "babel-core": "^6.4.0",
@@ -45,20 +46,21 @@
         "coveralls": "^2.11.6",
         "npm-run-all": "^3.0.0",
         "npmpub": "^3.1.0",
+        "package-schema": "~1.0.0",
         "eslint": "^3.4.0",
         "eslint-plugin-ava": "^3.0.0",
-        "eslint-plugin-import": "^1.14.0",
-        "eslint-plugin-itgalaxy": "^13.0.0",
+        "eslint-plugin-import": "^2.0.0",
+        "eslint-plugin-itgalaxy": "^23.0.0",
         "eslint-plugin-jsx-a11y": "^2.2.0",
-        "eslint-plugin-lodash": "^1.10.0",
+        "eslint-plugin-lodash": "^2.1.0",
         "eslint-plugin-node": "^2.0.0",
-        "eslint-plugin-promise": "^2.0.0",
+        "eslint-plugin-promise": "^3.0.0",
         "eslint-plugin-react": "^6.2.0",
-        "eslint-plugin-xo": "^0.5.0",
-        "execa": "^0.4.0",
+        "eslint-plugin-unicorn": "^1.0.0",
+        "execa": "^0.5.0",
         "remark-cli": "^2.0.0",
         "remark-lint": "^5.0.0",
-        "remark-preset-lint-itgalaxy": "^1.0.0",
+        "remark-preset-lint-itgalaxy": "^2.0.0",
         "rimraf": "^2.5.2",
         "nyc": "^8.0.0",
         "tempfile": "^1.1.0",
@@ -67,6 +69,7 @@
     "scripts": {
         "coveralls": "nyc report --reporter=text-lcov | coveralls",
         "lint:eslint": "eslint . --ignore-path .gitignore",
+        "lint:package": "ajv -s ./node_modules/package-schema/schema.json -d package --errors=text",
         "lint:remark": "remark . --ignore-path .gitignore --frail --quiet",
         "lint": "npm-run-all -l --parallel lint:*",
         "pretest": "npm run lint",
@@ -76,11 +79,6 @@
         "build": "babel src --out-dir dist --ignore /__tests__/",
         "prepublish": "npm run build",
         "release": "npmpub"
-    },
-    "nyc": {
-        "exclude": [
-            "**/__tests__"
-        ]
     },
     "ava": {
         "require": "babel-register",
@@ -99,9 +97,6 @@
         ]
     },
     "eslintConfig": {
-        "rules": {
-            "node/shebang": "off"
-        },
         "extends": [
             "plugin:itgalaxy/ava",
             "plugin:itgalaxy/esnext",

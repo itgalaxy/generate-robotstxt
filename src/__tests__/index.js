@@ -1,5 +1,6 @@
 import generateRobotstxt from '../index';
 import path from 'path';
+// eslint-disable-next-line node/no-unpublished-import
 import test from 'ava';
 
 const fixturesPath = path.join(__dirname, 'fixtures');
@@ -67,7 +68,7 @@ test('should contain two policy item, first have multiple "User-agent"',
             t.is(
                 content,
                 'User-agent: Google\nUser-agent: AnotherBot\nAllow: /\nDisallow: /search-foo\n\n'
-                + 'User-agent: Yandex\nAllow: /\nDisallow: /search-bar\n'
+                    + 'User-agent: Yandex\nAllow: /\nDisallow: /search-bar\n'
             );
         })
 );
