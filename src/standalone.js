@@ -16,6 +16,42 @@ function addLine(name, rule) {
     return contents;
 }
 
+function generatePoliceItem(item, index) {
+    if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
+        throw new Error('Each "police" should have "User-agent"');
+    }
+
+    let contents = '';
+
+    if (index !== 0) {
+        contents += '\n';
+    }
+
+    contents += addLine('User-agent', item.userAgent);
+
+    if (item.allow) {
+        contents += addLine('Allow', item.allow);
+    }
+
+    if (item.disallow) {
+        contents += addLine('Disallow', item.disallow);
+    }
+
+    if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
+        throw new Error('Options "crawlDelay" must be integer or float');
+    }
+
+    if (item.crawlDelay) {
+        contents += addLine('Crawl-delay', item.crawlDelay);
+    }
+
+    if (item.cleanParam) {
+        contents += addLine('Clean-param', item.cleanParam);
+    }
+
+    return contents;
+}
+
 export default function ({
     configFile = null,
     policy = [{
@@ -63,42 +99,9 @@ export default function ({
             }
 
             let contents = '';
-            let counter = 0;
 
-            options.policy.forEach((item) => {
-                if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
-                    return reject(new Error('Each "police" should have "User-agent"'));
-                }
-
-                contents += addLine('User-agent', item.userAgent);
-
-                if (item.allow) {
-                    contents += addLine('Allow', item.allow);
-                }
-
-                if (item.disallow) {
-                    contents += addLine('Disallow', item.disallow);
-                }
-
-                if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
-                    return reject(new Error('Options "crawlDelay" must be integer or float'));
-                }
-
-                if (item.crawlDelay) {
-                    contents += addLine('Crawl-delay', item.crawlDelay);
-                }
-
-                if (item.cleanParam) {
-                    contents += addLine('Clean-param', item.cleanParam);
-                }
-
-                counter++;
-
-                if (counter !== options.policy.length) {
-                    contents += '\n';
-                }
-
-                return item;
+            options.policy.forEach((item, index) => {
+                contents += generatePoliceItem(item, index);
             });
 
             if (options.sitemap) {

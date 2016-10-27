@@ -22,7 +22,35 @@ npm install generate-robotstxt
 ```js
 const robotstxt = require('generate-robotstxt').default;
 
-// Pass in the absolute path to your robots.txt file
+robotstxt({
+    policy: [
+        {
+            userAgent: 'Googlebot',
+            allow: '/',
+            disallow: '/search',
+            crawlDelay: 2
+        },
+        {
+            userAgent: '*',
+            allow: '/',
+            disallow: '/search',
+            crawlDelay: 10,
+            cleanParam: 'ref /articles/'
+        }
+    ],
+    sitemap: 'sitemap.xml',
+    host: 'http://example.com'
+})
+  .then((content) => {
+    console.log(content);
+  });
+```
+
+Or
+
+```js
+import robotstxt from 'generate-robotstxt';
+
 robotstxt({
     policy: [
         {

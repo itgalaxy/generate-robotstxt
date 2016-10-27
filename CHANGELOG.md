@@ -1,4 +1,4 @@
-# Head
+# 4.0.1 - 2016-10-27
 
 - Chore: added support `nodejs` `7`.
 - Chore: update a minimal version of `npm-run-all` from `2.3.0` to `3.0.0`.
@@ -11,6 +11,7 @@
 - Chore: update a minimal version of `eslint-plugin-promise` from `2.0.0` to `3.0.0`. 
 - Chore: update a minimal version of `eslint-plugin-lodash` fro `1.10.0` to `2.1.0`.
 - Chore: update a minimal version of `eslint-plugin-import` from `1.14.0` to `2.0.0`.
+- Documentation: improve `README.md` and fix typos.
 
 # 4.0.0
 
