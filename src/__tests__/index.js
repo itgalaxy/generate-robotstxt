@@ -5,7 +5,7 @@ import test from 'ava';
 
 const fixturesPath = path.join(__dirname, 'fixtures');
 
-test('should generated default content without options',
+test('should generated default output without options',
     (t) => generateRobotstxt()
         .then((content) => {
             t.is(content, 'User-agent: *\nAllow: /\n');
