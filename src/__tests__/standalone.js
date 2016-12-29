@@ -123,6 +123,15 @@ test('should contain `Host`',
         })
 );
 
+test('should contain `Host` without trailing slash',
+    (t) => generateRobotstxt({
+        host: 'http://domain.com/'
+    })
+        .then((content) => {
+            t.is(content, 'User-agent: *\nAllow: /\nHost: domain.com\n');
+        })
+);
+
 test('should contain `Host` if `host` options without protocol scheme',
     (t) => generateRobotstxt({
         host: 'www.domain.com'
