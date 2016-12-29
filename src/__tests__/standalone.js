@@ -79,18 +79,18 @@ test('should throw error if `policy` option is not array', (t) => {
     }), 'Options `policy` must be array');
 });
 
-test('should throw error if `policy` option not have `userAgent`', (t) => {
+test('should throw error if `policy` option not have `userAgent` option', (t) => {
     t.throws(generateRobotstxt({
         policy: [{}]
-    }), 'Each `police` should have `User-agent` option');
+    }), 'Each `police` should have single string `userAgent` option');
 });
 
-test('should throw error if `policy` option have empty `userAgent`', (t) => {
+test('should throw error if `policy` option have array `userAgent` option', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             userAgent: []
         }]
-    }), 'Each `police` should have `User-agent` option');
+    }), 'Each `police` should have single string `userAgent` option');
 });
 
 test('should contain `Sitemap`',
@@ -144,19 +144,19 @@ test('should contain `Host` if `host` options without protocol scheme',
 test('should throw error on invalid `host` option',
     (t) => t.throws(generateRobotstxt({
         host: '?:foobar'
-    }), /Option\s`host`\sdoes\snot\scontain\scorrect\shost/)
+    }), 'Option `host` does not contain correct host')
 );
 
 test('should throw error if `host` being IP address version 4',
     (t) => t.throws(generateRobotstxt({
         host: '127.0.0.1'
-    }), /Options\s`host`\sshould\sbe\snot\sIP\saddress/)
+    }), 'Options `host` should be not IP address')
 );
 
 test('should throw error if `host` being IP address version 6',
     (t) => t.throws(generateRobotstxt({
         host: '0:0:0:0:0:0:7f00:1'
-    }), /Options\s`host`\sshould\sbe\snot\sIP\saddress/)
+    }), 'Options `host` should be not IP address')
 );
 
 test('should contain `Host` with `https` scheme',
@@ -183,7 +183,7 @@ test('should throw error if `Host` option is array', (t) => {
             'http://domain.com',
             'http://domain1.com'
         ]
-    }), 'Options `host` must be one');
+    }), 'Options `host` must be `string` and single');
 });
 
 test('should contain multiple `User-agent` and `Crawl-delay`',

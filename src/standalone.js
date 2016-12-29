@@ -21,7 +21,7 @@ function addLine(name, rule) {
 
 function generatePoliceItem(item, index) {
     if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
-        throw new Error('Each `police` should have `User-agent` option');
+        throw new Error('Each `police` should have single string `userAgent` option');
     }
 
     let contents = '';
@@ -98,8 +98,8 @@ export default function ({
             }
 
             if (options.host) {
-                if (Array.isArray(options.host)) {
-                    throw new Error('Options `host` must be one');
+                if (typeof options.host !== 'string') {
+                    throw new Error('Options `host` must be `string` and single');
                 }
 
                 const address4 = new Address4(options.host);
