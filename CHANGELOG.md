@@ -10,6 +10,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed: thrown error if `host` option being IP address.
 - Fixed: clarified error message on multiple and not string `userAgent` option.
 - Fixed: `Host` directive is now not containing `80` port.
+- Fixed: thrown error if `cleanParam` not string or array and if string not more than 500 characters.
 
 # 4.0.1 - 2016-10-27
 

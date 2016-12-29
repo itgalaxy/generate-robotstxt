@@ -98,6 +98,24 @@ export default function ({
                     if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
                         throw new Error('Option `crawlDelay` must be integer or float');
                     }
+
+                    if (item.cleanParam) {
+                        if (typeof item.cleanParam === 'string' && item.cleanParam.length > 500) {
+                            throw new Error('Option `cleanParam` should be less or equal 500 characters');
+                        } else if (Array.isArray(item.cleanParam)) {
+                            item.cleanParam.forEach((subItem) => {
+                                if (typeof subItem === 'string' && subItem.length > 500) {
+                                    throw new Error(
+                                        'String in `cleanParam` option should be less or equal 500 characters'
+                                    );
+                                } else if (typeof subItem !== 'string') {
+                                    throw new Error('String in `cleanParam` option should be string');
+                                }
+                            });
+                        } else if (typeof item.cleanParam !== 'string' && !Array.isArray(item.cleanParam)) {
+                            throw new Error('Option `cleanParam` should be string or array');
+                        }
+                    }
                 });
             }
 

@@ -259,17 +259,45 @@ test('should contain one policy item with two `Clean-params`',
         })
 );
 
-/*
-test('should throw error if `cleanParam` more than 500 characters', (t) => {
+test('should throw error if `cleanParam` option more than 500 characters', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
-            cleanParam: new Array(501).join('a'),
+            cleanParam: new Array(502).join('a'),
             userAgent: 'Yandex'
         }]
-    }), 'Option `cleanParam` can\'t be more than 500 characters');
+    }), 'Option `cleanParam` should be less or equal 500 characters');
 });
-*/
+
+test('should throw error if item in `cleanParam` option more than 500 characters', (t) => {
+    t.throws(generateRobotstxt({
+        policy: [{
+            allow: '/',
+            cleanParam: [new Array(502).join('a')],
+            userAgent: 'Yandex'
+        }]
+    }), 'String in `cleanParam` option should be less or equal 500 characters');
+});
+
+test('should throw error if `cleanParam` option not string or array', (t) => {
+    t.throws(generateRobotstxt({
+        policy: [{
+            allow: '/',
+            cleanParam: {},
+            userAgent: 'Yandex'
+        }]
+    }), 'Option `cleanParam` should be string or array');
+});
+
+test('should throw error if item in `cleanParam` option not string', (t) => {
+    t.throws(generateRobotstxt({
+        policy: [{
+            allow: '/',
+            cleanParam: [{}],
+            userAgent: 'Yandex'
+        }]
+    }), 'String in `cleanParam` option should be string');
+});
 
 test('should load config file',
     (t) => generateRobotstxt({
