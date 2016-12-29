@@ -137,12 +137,13 @@ export default function ({
                     throw new Error('Option `host` does not contain correct host');
                 }
 
-                const formattedHost = parsedURL.protocol && parsedURL.protocol === 'https:'
-                    ? url.format({
-                        host: parsedURL.host,
-                        protocol: parsedURL.protocol
-                    })
-                    : parsedURL.host;
+                let formattedHost = url.format({
+                    host: parsedURL.port && parsedURL.port === '80' ? parsedURL.hostname : parsedURL.host,
+                    port: parsedURL.port && parsedURL.port === '80' ? '' : parsedURL.port,
+                    protocol: parsedURL.protocol
+                });
+
+                formattedHost = formattedHost.replace(/^http:\/\//, '');
 
                 contents += addLine('Host', formattedHost);
             }

@@ -9,6 +9,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Fixed: `host` options is now processed based `URL`.
 - Fixed: thrown error if `host` option being IP address.
 - Fixed: clarified error message on multiple and not string `userAgent` option.
+- Fixed: `Host` directive is now not containing `80` port.
 
 # 4.0.1 - 2016-10-27
 
