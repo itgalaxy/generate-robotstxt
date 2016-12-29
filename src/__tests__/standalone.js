@@ -147,6 +147,18 @@ test('should throw error on invalid `host` option',
     }), /Option\s`host`\sdoes\snot\scontain\scorrect\shost/)
 );
 
+test('should throw error if `host` being IP address version 4',
+    (t) => t.throws(generateRobotstxt({
+        host: '127.0.0.1'
+    }), /Options\s`host`\sshould\sbe\snot\sIP\saddress/)
+);
+
+test('should throw error if `host` being IP address version 6',
+    (t) => t.throws(generateRobotstxt({
+        host: '0:0:0:0:0:0:7f00:1'
+    }), /Options\s`host`\sshould\sbe\snot\sIP\saddress/)
+);
+
 test('should contain `Host` with `https` scheme',
     (t) => generateRobotstxt({
         host: 'https://domain.com'
@@ -201,7 +213,7 @@ test('should throw error on invalid `crawlDelay` option', (t) => {
             crawlDelay: 'foo',
             userAgent: 'Google'
         }]
-    }), 'Options `crawlDelay` must be integer or float');
+    }), 'Option `crawlDelay` must be integer or float');
 });
 
 test('should contain one policy item with one `Clean-param`',
@@ -237,6 +249,18 @@ test('should contain one policy item with two `Clean-params`',
             );
         })
 );
+
+/*
+test('should throw error if `cleanParam` more than 500 characters', (t) => {
+    t.throws(generateRobotstxt({
+        policy: [{
+            allow: '/',
+            cleanParam: new Array(501).join('a'),
+            userAgent: 'Yandex'
+        }]
+    }), 'Option `cleanParam` can\'t be more than 500 characters');
+});
+*/
 
 test('should load config file',
     (t) => generateRobotstxt({

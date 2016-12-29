@@ -1,3 +1,4 @@
+import { Address4, Address6 } from 'ip-address';
 import url from 'url';
 
 function capitaliseFirstLetter(string) {
@@ -40,7 +41,7 @@ function generatePoliceItem(item, index) {
     }
 
     if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
-        throw new Error('Options `crawlDelay` must be integer or float');
+        throw new Error('Option `crawlDelay` must be integer or float');
     }
 
     if (item.crawlDelay) {
@@ -91,13 +92,22 @@ export default function ({
     }
 
     return starter
-        .then(() => new Promise((resolve, reject) => {
+        .then(() => new Promise((resolve) => {
             if (!Array.isArray(options.policy)) {
-                return reject(new Error('Options `policy` must be array'));
+                throw new Error('Options `policy` must be array');
             }
 
-            if (Array.isArray(options.host)) {
-                return reject(new Error('Options `host` must be one'));
+            if (options.host) {
+                if (Array.isArray(options.host)) {
+                    throw new Error('Options `host` must be one');
+                }
+
+                const address4 = new Address4(options.host);
+                const address6 = new Address6(options.host);
+
+                if (address4.isValid() || address6.isValid()) {
+                    throw new Error('Options `host` should be not IP address');
+                }
             }
 
             let contents = '';
