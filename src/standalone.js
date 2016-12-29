@@ -20,10 +20,6 @@ function addLine(name, rule) {
 }
 
 function generatePoliceItem(item, index) {
-    if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
-        throw new Error('Each `police` should have single string `userAgent` option');
-    }
-
     let contents = '';
 
     if (index !== 0) {
@@ -38,10 +34,6 @@ function generatePoliceItem(item, index) {
 
     if (item.disallow) {
         contents += addLine('Disallow', item.disallow);
-    }
-
-    if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
-        throw new Error('Option `crawlDelay` must be integer or float');
     }
 
     if (item.crawlDelay) {
@@ -93,8 +85,20 @@ export default function ({
 
     return starter
         .then(() => new Promise((resolve) => {
-            if (!Array.isArray(options.policy)) {
-                throw new Error('Options `policy` must be array');
+            if (options.policy) {
+                if (!Array.isArray(options.policy)) {
+                    throw new Error('Options `policy` must be array');
+                }
+
+                options.policy.forEach((item) => {
+                    if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
+                        throw new Error('Each `police` should have single string `userAgent` option');
+                    }
+
+                    if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
+                        throw new Error('Option `crawlDelay` must be integer or float');
+                    }
+                });
             }
 
             if (options.host) {
