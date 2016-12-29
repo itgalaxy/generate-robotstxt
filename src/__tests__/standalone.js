@@ -12,7 +12,7 @@ test('should generated default output without options',
         })
 );
 
-test('should `contain one policy item with `Allow`',
+test('should `contain one `policy` item with `Allow` directive',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -24,7 +24,7 @@ test('should `contain one policy item with `Allow`',
         })
 );
 
-test('should `contain two policy item with `Allow`',
+test('should contain two `policy` item with `Allow` directive',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -43,7 +43,7 @@ test('should `contain two policy item with `Allow`',
         })
 );
 
-test('should `contain two policy item with `Allow` and `Disallow`',
+test('should `contain two `policy` item with `Allow` and `Disallow` directives',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -64,7 +64,7 @@ test('should `contain two policy item with `Allow` and `Disallow`',
         })
 );
 
-test('should `contain two policy item, first have multiple `User-agent`',
+test('should `contain two policy item, first have multiple `User-agent` option',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -81,6 +81,22 @@ test('should `contain two policy item, first have multiple `User-agent`',
                 content,
                 'User-agent: Google\nUser-agent: AnotherBot\nAllow: /\nDisallow: /search-foo\n\n'
                     + 'User-agent: Yandex\nAllow: /\nDisallow: /search-bar\n'
+            );
+        })
+);
+
+test('should use encode url in `allow` and `disallow` options',
+    (t) => generateRobotstxt({
+        policy: [{
+            allow: '/корзина',
+            disallow: '/личный-кабинет',
+            userAgent: 'Google'
+        }]
+    })
+        .then((content) => {
+            t.is(content, 'User-agent: Google\n'
+                + 'Allow: /%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D0%B0\n'
+                + 'Disallow: /%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82\n'
             );
         })
 );

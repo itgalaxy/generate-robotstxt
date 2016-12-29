@@ -13,7 +13,11 @@ function addLine(name, rule) {
             contents += addLine(name, item);
         });
     } else {
-        contents += `${capitaliseFirstLetter(name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase())}: ${rule}\n`;
+        const ruleContent = name === 'Allow' || name === 'Disallow' ? encodeURI(rule) : rule;
+
+        contents += `${
+            capitaliseFirstLetter(name.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase())
+        }: ${ruleContent}\n`;
     }
 
     return contents;
