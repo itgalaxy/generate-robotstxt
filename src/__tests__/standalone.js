@@ -1,4 +1,4 @@
-import generateRobotstxt from '../index';
+import generateRobotstxt from '../standalone';
 import path from 'path';
 // eslint-disable-next-line node/no-unpublished-import
 import test from 'ava';
@@ -12,7 +12,19 @@ test('should generated default output without options',
         })
 );
 
-test('should contain two policy item with `Allow`',
+test('should `contain one policy item with `Allow`',
+    (t) => generateRobotstxt({
+        policy: [{
+            allow: '/',
+            userAgent: 'Google'
+        }]
+    })
+        .then((content) => {
+            t.is(content, 'User-agent: Google\nAllow: /\n');
+        })
+);
+
+test('should `contain two policy item with `Allow`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -31,7 +43,7 @@ test('should contain two policy item with `Allow`',
         })
 );
 
-test('should contain two policy item with `Allow` and `Disallow`',
+test('should `contain two policy item with `Allow` and `Disallow`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -52,7 +64,7 @@ test('should contain two policy item with `Allow` and `Disallow`',
         })
 );
 
-test('should contain two policy item, first have multiple `User-agent`',
+test('should `contain two policy item, first have multiple `User-agent`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -93,7 +105,7 @@ test('should throw error if `policy` option have array `userAgent` option', (t) 
     }), 'Each `police` should have single string `userAgent` option');
 });
 
-test('should contain `Sitemap`',
+test('should `contain `Sitemap`',
     (t) => generateRobotstxt({
         sitemap: 'sitemap.xml'
     })
@@ -102,7 +114,7 @@ test('should contain `Sitemap`',
         })
 );
 
-test('should contain two `Sitemap`',
+test('should `contain two `Sitemap`',
     (t) => generateRobotstxt({
         sitemap: [
             'sitemap.xml',
@@ -114,7 +126,7 @@ test('should contain two `Sitemap`',
         })
 );
 
-test('should contain `Host`',
+test('should `contain `Host`',
     (t) => generateRobotstxt({
         host: 'http://domain.com'
     })
@@ -123,7 +135,7 @@ test('should contain `Host`',
         })
 );
 
-test('should contain `Host` without trailing slash',
+test('should `contain `Host` without trailing slash',
     (t) => generateRobotstxt({
         host: 'http://domain.com/'
     })
@@ -132,7 +144,7 @@ test('should contain `Host` without trailing slash',
         })
 );
 
-test('should contain `Host` in punycode format',
+test('should `contain `Host` in punycode format',
     (t) => generateRobotstxt({
         host: 'интернет-магазин.рф'
     })
@@ -141,7 +153,7 @@ test('should contain `Host` in punycode format',
         })
 );
 
-test('should contain `Host` without `80` port',
+test('should `contain `Host` without `80` port',
     (t) => generateRobotstxt({
         host: 'domain.com:80'
     })
@@ -150,7 +162,7 @@ test('should contain `Host` without `80` port',
         })
 );
 
-test('should contain `Host` if `host` options without protocol scheme',
+test('should `contain `Host` if `host` options without protocol scheme',
     (t) => generateRobotstxt({
         host: 'www.domain.com'
     })
@@ -177,7 +189,7 @@ test('should throw error if `host` being IP address version 6',
     }), 'Options `host` should be not IP address')
 );
 
-test('should contain `Host` with `https` scheme',
+test('should `contain `Host` with `https` scheme',
     (t) => generateRobotstxt({
         host: 'https://domain.com'
     })
@@ -186,7 +198,7 @@ test('should contain `Host` with `https` scheme',
         })
 );
 
-test('should contain `Host` without any extra URL entire',
+test('should `contain `Host` without any extra URL entire',
     (t) => generateRobotstxt({
         host: 'http://www.domain.com:8080/foo/bar/foobar.php?foo=bar#foobar'
     })
@@ -204,7 +216,7 @@ test('should throw error if `Host` option is array', (t) => {
     }), 'Options `host` must be `string` and single');
 });
 
-test('should contain multiple `User-agent` and `Crawl-delay`',
+test('should `contain multiple `User-agent` and `Crawl-delay`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -234,7 +246,7 @@ test('should throw error on invalid `crawlDelay` option', (t) => {
     }), 'Option `crawlDelay` must be integer or float');
 });
 
-test('should contain one policy item with one `Clean-param`',
+test('should `contain one policy item with one `Clean-param`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -247,7 +259,7 @@ test('should contain one policy item with one `Clean-param`',
         })
 );
 
-test('should contain one policy item with two `Clean-params`',
+test('should `contain one policy item with two `Clean-params`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
