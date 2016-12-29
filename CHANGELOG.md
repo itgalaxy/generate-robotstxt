@@ -19,6 +19,7 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 - Chore: minimum required `eslint-plugin-react` version is now `^6.8.0`.
 - Chore: minimum required `remark-preset-lint-itgalaxy` version is now `^3.0.0`.
 - Chore: minimum required `nyc` version is now `^10.0.0`.
+- Fixed: `host` options is now processed based `URL`.
 
 # 4.0.1 - 2016-10-27
 

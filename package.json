@@ -73,7 +73,7 @@
         "lint:remark": "remark . -f --ignore-path .gitignore --quiet",
         "lint": "npm-run-all -l --parallel lint:*",
         "pretest": "npm run lint",
-        "ava": "nyc ava --verbose \"src/**/__tests__/*.js\"",
+        "ava": "nyc ava --verbose",
         "test": "npm run ava",
         "prebuild": "rimraf dist",
         "build": "babel src --out-dir dist --ignore /__tests__/",

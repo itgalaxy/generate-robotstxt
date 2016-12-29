@@ -1,3 +1,5 @@
+import url from 'url';
+
 function capitaliseFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
@@ -18,7 +20,7 @@ function addLine(name, rule) {
 
 function generatePoliceItem(item, index) {
     if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
-        throw new Error('Each "police" should have "User-agent"');
+        throw new Error('Each `police` should have `User-agent` option');
     }
 
     let contents = '';
@@ -38,7 +40,7 @@ function generatePoliceItem(item, index) {
     }
 
     if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
-        throw new Error('Options "crawlDelay" must be integer or float');
+        throw new Error('Options `crawlDelay` must be integer or float');
     }
 
     if (item.crawlDelay) {
@@ -91,11 +93,11 @@ export default function ({
     return starter
         .then(() => new Promise((resolve, reject) => {
             if (!Array.isArray(options.policy)) {
-                return reject(new Error('Options "policy" must be array'));
+                return reject(new Error('Options `policy` must be array'));
             }
 
-            if (Array.isArray(host)) {
-                return reject(new Error('Options "host" must be one'));
+            if (Array.isArray(options.host)) {
+                return reject(new Error('Options `host` must be one'));
             }
 
             let contents = '';
@@ -109,7 +111,26 @@ export default function ({
             }
 
             if (options.host) {
-                contents += addLine('Host', options.host);
+                let normalizeHost = options.host;
+
+                if (normalizeHost.search(/^http[s]?:\/\//) === -1) {
+                    normalizeHost = `http://${host}`;
+                }
+
+                const parsedURL = url.parse(normalizeHost, false, true);
+
+                if (!parsedURL.host) {
+                    throw new Error('Option `host` does not contain correct host');
+                }
+
+                const formattedHost = parsedURL.protocol && parsedURL.protocol === 'https:'
+                    ? url.format({
+                        host: parsedURL.host,
+                        protocol: parsedURL.protocol
+                    })
+                    : parsedURL.host;
+
+                contents += addLine('Host', formattedHost);
             }
 
             return resolve(contents);
