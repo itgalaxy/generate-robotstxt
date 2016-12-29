@@ -132,6 +132,15 @@ test('should contain `Host` without trailing slash',
         })
 );
 
+test('should contain `Host` in punycode format',
+    (t) => generateRobotstxt({
+        host: 'интернет-магазин.рф'
+    })
+        .then((content) => {
+            t.is(content, 'User-agent: *\nAllow: /\nHost: xn----8sbalhasbh9ahbi6a2ae.xn--p1ai\n');
+        })
+);
+
 test('should contain `Host` without `80` port',
     (t) => generateRobotstxt({
         host: 'domain.com:80'
