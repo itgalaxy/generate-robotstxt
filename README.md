@@ -67,7 +67,7 @@ robotstxt({
             cleanParam: 'ref /articles/'
         }
     ],
-    sitemap: 'sitemap.xml',
+    sitemap: 'http://example.com/sitemap.xml',
     host: 'http://example.com'
 })
   .then((content) => {
