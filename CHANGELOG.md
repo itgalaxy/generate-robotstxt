@@ -7,11 +7,12 @@ This project adheres to [Semantic Versioning](http://semver.org/).
 # Head
 
 - Fixed: `host` options is now processed based `URL`.
-- Fixed: thrown error if `host` option being IP address.
-- Fixed: clarified error message on multiple and not string `userAgent` option.
+- Fixed: thrown error if the `host` option being IP address.
+- Fixed: clarified error message on multiple and not string the `userAgent` option.
 - Fixed: `Host` directive is now not containing `80` port.
-- Fixed: thrown error if `cleanParam` not string or array and if string not more than 500 characters.
-- Fixed: supported unicode characters in `Allow` and `Disallow` directives.
+- Fixed: thrown error if the `cleanParam` not string or array and if string not more than 500 characters.
+- Fixed: supported unicode characters in a `Allow` and a `Disallow` directives.
+- Fixed: thrown error if the `sitemap` option not an array or a string and not an absolute URL.
 
 # 4.0.1 - 2016-10-27
 

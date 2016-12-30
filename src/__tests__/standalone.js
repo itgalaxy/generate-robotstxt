@@ -12,7 +12,7 @@ test('should generated default output without options',
         })
 );
 
-test('should `contain one `policy` item with `Allow` directive',
+test('should `contain one `policy` item with the `Allow` directive',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -24,7 +24,7 @@ test('should `contain one `policy` item with `Allow` directive',
         })
 );
 
-test('should contain two `policy` item with `Allow` directive',
+test('should contain two `policy` item with the `Allow` directive',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -43,7 +43,7 @@ test('should contain two `policy` item with `Allow` directive',
         })
 );
 
-test('should `contain two `policy` item with `Allow` and `Disallow` directives',
+test('should `contain two `policy` item with the `Allow` and the `Disallow` directives',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -85,7 +85,7 @@ test('should `contain two policy item, first have multiple `User-agent` option',
         })
 );
 
-test('should use encode url in `allow` and `disallow` options',
+test('should use encode url in the `allow` and the `disallow` options',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/корзина',
@@ -101,48 +101,76 @@ test('should use encode url in `allow` and `disallow` options',
         })
 );
 
-test('should throw error if `policy` option is not array', (t) => {
+test('should throw error if the `policy` option is not array', (t) => {
     t.throws(generateRobotstxt({
         policy: 'string'
     }), 'Options `policy` must be array');
 });
 
-test('should throw error if `policy` option not have `userAgent` option', (t) => {
+test('should throw error if the `policy` option not have the `userAgent` option', (t) => {
     t.throws(generateRobotstxt({
         policy: [{}]
-    }), 'Each `police` should have single string `userAgent` option');
+    }), 'Each `police` should have a single string `userAgent` option');
 });
 
-test('should throw error if `policy` option have array `userAgent` option', (t) => {
+test('should throw error if the `policy` option have array the `userAgent` option', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             userAgent: []
         }]
-    }), 'Each `police` should have single string `userAgent` option');
+    }), 'Each `police` should have a single string `userAgent` option');
 });
 
-test('should `contain `Sitemap`',
+test('should contain the `Sitemap` directive',
     (t) => generateRobotstxt({
-        sitemap: 'sitemap.xml'
+        sitemap: 'http://foobar.com/sitemap.xml'
     })
         .then((content) => {
-            t.is(content, 'User-agent: *\nAllow: /\nSitemap: sitemap.xml\n');
+            t.is(content, 'User-agent: *\nAllow: /\nSitemap: http://foobar.com/sitemap.xml\n');
         })
 );
 
-test('should `contain two `Sitemap`',
+test('should throw error if the `sitemap` option is not string or array',
+    (t) => t.throws(generateRobotstxt({
+        sitemap: {}
+    }), 'Option `sitemap` should be a string or an array')
+);
+
+test('should throw error if the `sitemap` option is not absolute URL',
+    (t) => t.throws(generateRobotstxt({
+        sitemap: 'sitemap.xml'
+    }), 'Option `sitemap` should be have an absolute URL')
+);
+
+test('should throw error if item in the `sitemap` option not a string or an array',
+    (t) => t.throws(generateRobotstxt({
+        sitemap: [{}]
+    }), 'Item in `sitemap` option should be a string')
+);
+
+test('should `contain two `Sitemap` directives',
     (t) => generateRobotstxt({
         sitemap: [
-            'sitemap.xml',
-            'sitemap1.xml'
+            'http://foobar.com/sitemap.xml',
+            'http://foobar.com/sitemap1.xml'
         ]
     })
         .then((content) => {
-            t.is(content, 'User-agent: *\nAllow: /\nSitemap: sitemap.xml\nSitemap: sitemap1.xml\n');
+            t.is(
+                content,
+                'User-agent: *\nAllow: /\n'
+                    + 'Sitemap: http://foobar.com/sitemap.xml\nSitemap: http://foobar.com/sitemap1.xml\n'
+            );
         })
 );
 
-test('should `contain `Host`',
+test('should throw error if item in the `sitemap` option not an absolute URL',
+    (t) => t.throws(generateRobotstxt({
+        sitemap: ['sitemap.xml']
+    }), 'Item in `sitemap` option should be an absolute URL')
+);
+
+test('should `contain the `Host`',
     (t) => generateRobotstxt({
         host: 'http://domain.com'
     })
@@ -151,7 +179,7 @@ test('should `contain `Host`',
         })
 );
 
-test('should `contain `Host` without trailing slash',
+test('should contain the `Host` without a trailing slash',
     (t) => generateRobotstxt({
         host: 'http://domain.com/'
     })
@@ -160,7 +188,7 @@ test('should `contain `Host` without trailing slash',
         })
 );
 
-test('should `contain `Host` in punycode format',
+test('should contain the `Host` in punycode format',
     (t) => generateRobotstxt({
         host: 'интернет-магазин.рф'
     })
@@ -169,7 +197,7 @@ test('should `contain `Host` in punycode format',
         })
 );
 
-test('should `contain `Host` without `80` port',
+test('should contain the `Host` without `80` port',
     (t) => generateRobotstxt({
         host: 'domain.com:80'
     })
@@ -178,7 +206,7 @@ test('should `contain `Host` without `80` port',
         })
 );
 
-test('should `contain `Host` if `host` options without protocol scheme',
+test('should contain the `Host` if `host` options without protocol scheme',
     (t) => generateRobotstxt({
         host: 'www.domain.com'
     })
@@ -193,19 +221,19 @@ test('should throw error on invalid `host` option',
     }), 'Option `host` does not contain correct host')
 );
 
-test('should throw error if `host` being IP address version 4',
+test('should throw error if the `host` option being IP address version 4',
     (t) => t.throws(generateRobotstxt({
         host: '127.0.0.1'
-    }), 'Options `host` should be not IP address')
+    }), 'Options `host` should be not an IP address')
 );
 
-test('should throw error if `host` being IP address version 6',
+test('should throw error if the `host` option being IP address version 6',
     (t) => t.throws(generateRobotstxt({
         host: '0:0:0:0:0:0:7f00:1'
-    }), 'Options `host` should be not IP address')
+    }), 'Options `host` should be not an IP address')
 );
 
-test('should `contain `Host` with `https` scheme',
+test('should contain the `Host` with `https` scheme',
     (t) => generateRobotstxt({
         host: 'https://domain.com'
     })
@@ -214,7 +242,7 @@ test('should `contain `Host` with `https` scheme',
         })
 );
 
-test('should `contain `Host` without any extra URL entire',
+test('should contain the `Host` without any extra URL entire',
     (t) => generateRobotstxt({
         host: 'http://www.domain.com:8080/foo/bar/foobar.php?foo=bar#foobar'
     })
@@ -223,16 +251,16 @@ test('should `contain `Host` without any extra URL entire',
         })
 );
 
-test('should throw error if `Host` option is array', (t) => {
+test('should throw error if the `Host` option is array', (t) => {
     t.throws(generateRobotstxt({
         host: [
             'http://domain.com',
             'http://domain1.com'
         ]
-    }), 'Options `host` must be `string` and single');
+    }), 'Options `host` must be only one string');
 });
 
-test('should `contain multiple `User-agent` and `Crawl-delay`',
+test('should contain multiple `User-agent` and `Crawl-delay`',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -259,10 +287,10 @@ test('should throw error on invalid `crawlDelay` option', (t) => {
             crawlDelay: 'foo',
             userAgent: 'Google'
         }]
-    }), 'Option `crawlDelay` must be integer or float');
+    }), 'Option `crawlDelay` must be an integer or a float');
 });
 
-test('should `contain one policy item with one `Clean-param`',
+test('should contain one policy item with one `Clean-param` option',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -275,7 +303,7 @@ test('should `contain one policy item with one `Clean-param`',
         })
 );
 
-test('should `contain one policy item with two `Clean-params`',
+test('should contain one policy item with two `Clean-params` options',
     (t) => generateRobotstxt({
         policy: [{
             allow: '/',
@@ -296,7 +324,7 @@ test('should `contain one policy item with two `Clean-params`',
         })
 );
 
-test('should throw error if `cleanParam` option more than 500 characters', (t) => {
+test('should throw error if the `cleanParam` option more than 500 characters', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
@@ -306,7 +334,7 @@ test('should throw error if `cleanParam` option more than 500 characters', (t) =
     }), 'Option `cleanParam` should be less or equal 500 characters');
 });
 
-test('should throw error if item in `cleanParam` option more than 500 characters', (t) => {
+test('should throw error if the item in `cleanParam` option more than 500 characters', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
@@ -316,27 +344,27 @@ test('should throw error if item in `cleanParam` option more than 500 characters
     }), 'String in `cleanParam` option should be less or equal 500 characters');
 });
 
-test('should throw error if `cleanParam` option not string or array', (t) => {
+test('should throw error if the `cleanParam` option not string or array', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: {},
             userAgent: 'Yandex'
         }]
-    }), 'Option `cleanParam` should be string or array');
+    }), 'Option `cleanParam` should be a string or an array');
 });
 
-test('should throw error if item in `cleanParam` option not string', (t) => {
+test('should throw error if the item in `cleanParam` option not string', (t) => {
     t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: [{}],
             userAgent: 'Yandex'
         }]
-    }), 'String in `cleanParam` option should be string');
+    }), 'String in `cleanParam` option should be a string');
 });
 
-test('should load config file',
+test('should load a config file',
     (t) => generateRobotstxt({
         configFile: `${fixturesPath}/config.js`
     })
@@ -348,7 +376,7 @@ test('should load config file',
         })
 );
 
-test('should load commonjs config file',
+test('should load a config file in commonjs format',
     (t) => generateRobotstxt({
         configFile: `${fixturesPath}/config-commonjs.js`
     })

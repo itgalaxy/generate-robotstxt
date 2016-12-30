@@ -1,4 +1,5 @@
 import { Address4, Address6 } from 'ip-address';
+import isAbsoluteUrl from 'is-absolute-url';
 import url from 'url';
 
 function capitaliseFirstLetter(string) {
@@ -96,11 +97,11 @@ export default function ({
 
                 options.policy.forEach((item) => {
                     if (!item.userAgent || (item.userAgent && item.userAgent.length === 0)) {
-                        throw new Error('Each `police` should have single string `userAgent` option');
+                        throw new Error('Each `police` should have a single string `userAgent` option');
                     }
 
                     if (item.crawlDelay && typeof item.crawlDelay !== 'number' && !isFinite(item.crawlDelay)) {
-                        throw new Error('Option `crawlDelay` must be integer or float');
+                        throw new Error('Option `crawlDelay` must be an integer or a float');
                     }
 
                     if (item.cleanParam) {
@@ -113,26 +114,42 @@ export default function ({
                                         'String in `cleanParam` option should be less or equal 500 characters'
                                     );
                                 } else if (typeof subItem !== 'string') {
-                                    throw new Error('String in `cleanParam` option should be string');
+                                    throw new Error('String in `cleanParam` option should be a string');
                                 }
                             });
                         } else if (typeof item.cleanParam !== 'string' && !Array.isArray(item.cleanParam)) {
-                            throw new Error('Option `cleanParam` should be string or array');
+                            throw new Error('Option `cleanParam` should be a string or an array');
                         }
                     }
                 });
             }
 
+            if (options.sitemap) {
+                if (typeof options.sitemap === 'string' && !isAbsoluteUrl(options.sitemap)) {
+                    throw new Error('Option `sitemap` should be have an absolute URL');
+                } else if (Array.isArray(options.sitemap)) {
+                    options.sitemap.forEach((item) => {
+                        if (typeof item === 'string' && !isAbsoluteUrl(item)) {
+                            throw new Error('Item in `sitemap` option should be an absolute URL');
+                        } else if (typeof item !== 'string') {
+                            throw new Error('Item in `sitemap` option should be a string');
+                        }
+                    });
+                } else if (typeof options.sitemap !== 'string' && !Array.isArray(options.sitemap)) {
+                    throw new Error('Option `sitemap` should be a string or an array');
+                }
+            }
+
             if (options.host) {
                 if (typeof options.host !== 'string') {
-                    throw new Error('Options `host` must be `string` and single');
+                    throw new Error('Options `host` must be only one string');
                 }
 
                 const address4 = new Address4(options.host);
                 const address6 = new Address6(options.host);
 
                 if (address4.isValid() || address6.isValid()) {
-                    throw new Error('Options `host` should be not IP address');
+                    throw new Error('Options `host` should be not an IP address');
                 }
             }
 
