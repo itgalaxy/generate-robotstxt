@@ -4,7 +4,7 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
-# Head
+# 4.0.2 - 2016-12-30
 
 - Fixed: `host` options is now processed based `URL`.
 - Fixed: thrown error if the `host` option being IP address.
