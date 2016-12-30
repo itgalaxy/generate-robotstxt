@@ -14,7 +14,7 @@ Awesome generator robots.txt.
 ## Installation
 
 ```shell
-npm install generate-robotstxt
+npm install --save-dev generate-robotstxt
 ```
 
 ## Usage
