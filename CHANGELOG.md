@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org/).
 
+# Head
+
+- Fixed: `is-absolute-url` package semver.
+
 # 4.0.2 - 2016-12-30
 
 - Fixed: `host` options is now processed based `URL`.
