@@ -101,25 +101,28 @@ test('should use encode url in the `allow` and the `disallow` options',
         })
 );
 
-test('should throw error if the `policy` option is not array', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the `policy` option is not array',
+    (t) => t.throws(generateRobotstxt({
         policy: 'string'
-    }), 'Options `policy` must be array');
-});
+    }), 'Options `policy` must be array')
+);
 
-test('should throw error if the `policy` option not have the `userAgent` option', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the `policy` option not have the `userAgent` option',
+    (t) => t.throws(generateRobotstxt({
         policy: [{}]
-    }), 'Each `police` should have a single string `userAgent` option');
-});
+    }), 'Each `police` should have a single string `userAgent` option')
+);
 
-test('should throw error if the `policy` option have array the `userAgent` option', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the `policy` option have array the `userAgent` option',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             userAgent: []
         }]
-    }), 'Each `police` should have a single string `userAgent` option');
-});
+    }), 'Each `police` should have a single string `userAgent` option')
+);
 
 test('should contain the `Sitemap` directive',
     (t) => generateRobotstxt({
@@ -251,14 +254,14 @@ test('should contain the `Host` without any extra URL entire',
         })
 );
 
-test('should throw error if the `Host` option is array', (t) => {
-    t.throws(generateRobotstxt({
+test('should throw error if the `Host` option is array',
+    (t) => t.throws(generateRobotstxt({
         host: [
             'http://domain.com',
             'http://domain1.com'
         ]
-    }), 'Options `host` must be only one string');
-});
+    }), 'Options `host` must be only one string')
+);
 
 test('should contain multiple `User-agent` and `Crawl-delay`',
     (t) => generateRobotstxt({
@@ -280,15 +283,16 @@ test('should contain multiple `User-agent` and `Crawl-delay`',
         })
 );
 
-test('should throw error on invalid `crawlDelay` option', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error on invalid `crawlDelay` option',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             crawlDelay: 'foo',
             userAgent: 'Google'
         }]
-    }), 'Option `crawlDelay` must be an integer or a float');
-});
+    }), 'Option `crawlDelay` must be an integer or a float')
+);
 
 test('should contain one policy item with one `Clean-param` option',
     (t) => generateRobotstxt({
@@ -324,45 +328,49 @@ test('should contain one policy item with two `Clean-params` options',
         })
 );
 
-test('should throw error if the `cleanParam` option more than 500 characters', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the `cleanParam` option more than 500 characters',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: new Array(502).join('a'),
             userAgent: 'Yandex'
         }]
-    }), 'Option `cleanParam` should be less or equal 500 characters');
-});
+    }), 'Option `cleanParam` should be less or equal 500 characters')
+);
 
-test('should throw error if the item in `cleanParam` option more than 500 characters', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the item in `cleanParam` option more than 500 characters',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: [new Array(502).join('a')],
             userAgent: 'Yandex'
         }]
-    }), 'String in `cleanParam` option should be less or equal 500 characters');
-});
+    }), 'String in `cleanParam` option should be less or equal 500 characters')
+);
 
-test('should throw error if the `cleanParam` option not string or array', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the `cleanParam` option not string or array',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: {},
             userAgent: 'Yandex'
         }]
-    }), 'Option `cleanParam` should be a string or an array');
-});
+    }), 'Option `cleanParam` should be a string or an array')
+);
 
-test('should throw error if the item in `cleanParam` option not string', (t) => {
-    t.throws(generateRobotstxt({
+test(
+    'should throw error if the item in `cleanParam` option not string',
+    (t) => t.throws(generateRobotstxt({
         policy: [{
             allow: '/',
             cleanParam: [{}],
             userAgent: 'Yandex'
         }]
-    }), 'String in `cleanParam` option should be a string');
-});
+    }), 'String in `cleanParam` option should be a string')
+);
 
 test('should load a config file',
     (t) => generateRobotstxt({
