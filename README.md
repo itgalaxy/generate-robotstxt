@@ -1,5 +1,7 @@
 # generate-robotstxt
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/generate-robotstxt.svg)](https://greenkeeper.io/)
+
 [![NPM version](https://img.shields.io/npm/v/generate-robotstxt.svg)](
 https://www.npmjs.org/package/generate-robotstxt) 
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/generate-robotstxt/master.svg?label=build)](
