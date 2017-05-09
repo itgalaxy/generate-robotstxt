@@ -1,7 +1,5 @@
 # generate-robotstxt
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/generate-robotstxt.svg)](https://greenkeeper.io/)
-
 [![NPM version](https://img.shields.io/npm/v/generate-robotstxt.svg)](
 https://www.npmjs.org/package/generate-robotstxt) 
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/generate-robotstxt/master.svg?label=build)](
@@ -10,6 +8,7 @@ https://travis-ci.org/itgalaxy/generate-robotstxt)
 https://david-dm.org/itgalaxy/generate-robotstxt) 
 [![devDependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/dev-status.svg)](
 https://david-dm.org/itgalaxy/generate-robotstxt?type=dev)
+[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/generate-robotstxt.svg)](https://greenkeeper.io/)
 
 Awesome generator robots.txt.
 
