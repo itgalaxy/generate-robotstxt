@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import meow from 'meow';
-import path from 'path';
-import resolveFrom from 'resolve-from';
-import standalone from './standalone';
+import fs from "fs";
+import meow from "meow";
+import path from "path";
+import resolveFrom from "resolve-from";
+import standalone from "./standalone";
 
 const cli = meow(
     `
@@ -16,11 +16,11 @@ const cli = meow(
     {
         alias: {
             /* eslint-disable id-length */
-            h: 'help',
-            v: 'version'
+            h: "help",
+            v: "version"
             /* eslint-enable id-length */
         },
-        string: ['config']
+        string: ["config"]
     }
 );
 
@@ -39,7 +39,7 @@ if (cli.flags.config) {
 }
 
 if (cli.input.length === 0) {
-    throw new Error('Require `dest` argument');
+    throw new Error("Require `dest` argument");
 }
 
 Promise.resolve()
