@@ -60,7 +60,7 @@
         "eslint-plugin-unicorn": "^2.1.2",
         "execa": "^0.7.0",
         "remark-cli": "^4.0.0",
-        "remark-preset-lint-itgalaxy": "^6.0.0",
+        "remark-preset-lint-itgalaxy": "^7.0.0",
         "rimraf": "^2.5.2",
         "nyc": "^11.0.1",
         "tempfile": "^2.0.0",
