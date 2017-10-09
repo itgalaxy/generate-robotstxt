@@ -1,4 +1,4 @@
 module.exports = {
-    // eslint-disable-line import/no-commonjs
-    host: "http://some-some-domain.com"
+  // eslint-disable-line import/no-commonjs
+  host: "http://some-some-domain.com"
 };

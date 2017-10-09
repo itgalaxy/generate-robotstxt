@@ -1,3 +1,3 @@
 export default {
-    host: "http://some-domain.com"
+  host: "http://some-domain.com"
 };

@@ -4,7 +4,7 @@
 [![Travis Build Status](https://img.shields.io/travis/itgalaxy/generate-robotstxt/master.svg?label=build)](https://travis-ci.org/itgalaxy/generate-robotstxt)
 [![dependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/status.svg)](https://david-dm.org/itgalaxy/generate-robotstxt)
 [![devDependencies Status](https://david-dm.org/itgalaxy/generate-robotstxt/dev-status.svg)](https://david-dm.org/itgalaxy/generate-robotstxt?type=dev)
-[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/generate-robotstxt.svg)](https://greenkeeper.io/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/itgalaxy/generate-robotstxt.svg)](https://greenkeeper.io)
 
 Awesome generator robots.txt.
 
@@ -78,4 +78,4 @@ Feel free to push your code if you agree with publishing under the MIT license.
 
 ## [Changelog](CHANGELOG.md)
 
-## [License](LICENSE.md)
+## [License](LICENSE)
