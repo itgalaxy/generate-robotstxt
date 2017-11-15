@@ -1,136 +1,142 @@
 {
-    "name": "generate-robotstxt",
-    "version": "4.0.4",
-    "description": "Awesome generator robots.txt",
-    "author": "itgalaxy <development@itgalaxy.company>",
-    "contributors": [
+  "name": "generate-robotstxt",
+  "version": "5.0.0",
+  "description": "Awesome generator robots.txt",
+  "author": "itgalaxy <development@itgalaxy.company>",
+  "contributors": [
+    {
+      "name": "Alexander Krasnoyarov",
+      "email": "alexander.krasnoyarov@itgalaxy.company",
+      "url": "https://vk.com/sterling_archer"
+    }
+  ],
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/itgalaxy/generate-robotstxt"
+  },
+  "keywords": [
+    "robotstxt",
+    "robots.txt",
+    "generate",
+    "robots-txt",
+    "user-agent",
+    "police"
+  ],
+  "bugs": {
+    "url": "https://github.com/itgalaxy/generate-robotstxt/issues"
+  },
+  "main": "dist/index.js",
+  "bin": "dist/cli.js",
+  "files": [
+    "dist"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "cosmiconfig": "^3.1.0",
+    "meow": "^3.3.0",
+    "resolve-from": "^4.0.0",
+    "ip-address": "^5.8.6",
+    "is-absolute-url": "^2.1.0",
+    "fs-extra": "^4.0.2"
+  },
+  "devDependencies": {
+    "ava": "^0.23.0",
+    "babel-cli": "^6.22.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.9.0",
+    "npm-run-all": "^4.0.0",
+    "npmpub": "^3.1.0",
+    "eslint": "^4.9.0",
+    "eslint-plugin-ava": "^4.2.1",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-itgalaxy": "^57.0.0",
+    "eslint-plugin-jest": "^21.2.0",
+    "eslint-plugin-jsx-a11y": "^6.0.0",
+    "eslint-plugin-lodash": "^2.4.3",
+    "eslint-plugin-node": "^5.1.0",
+    "eslint-plugin-prettier": "^2.1.2",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.1.0",
+    "eslint-plugin-unicorn": "^3.0.0",
+    "execa": "^0.8.0",
+    "remark-cli": "^4.0.0",
+    "remark-preset-lint-itgalaxy": "^12.0.0",
+    "rimraf": "^2.5.2",
+    "nyc": "^11.0.1",
+    "tempfile": "^2.0.0",
+    "path-exists": "^3.0.0",
+    "husky": "^0.14.0",
+    "lint-staged": "^5.0.0",
+    "prettier": "^1.5.2"
+  },
+  "scripts": {
+    "precommit": "lint-staged",
+    "lint:prettier": "prettier --list-different '{src,__tests__}/**/*.{js,jsx,md}' '*.{js,md}'",
+    "lint:remark": "remark . -i .gitignore -f -q",
+    "lint:eslint": "eslint . '.*.js' --report-unused-disable-directives --ignore-path .gitignore --ext '.js,.jsx'",
+    "lint": "npm-run-all -l -p 'lint:**'",
+    "fix:prettier": "prettier --write '{src,__tests__}/**/*.{js,jsx,md}' '*.{js,md}'",
+    "fix:eslint": "eslint . '.*.js' --fix --ignore-path .gitignore --ext '.js,.jsx'",
+    "fix": "npm-run-all -l -p 'fix:**'",
+    "pretest": "npm run lint",
+    "test-only": "nyc ava --verbose '**/__tests__/*.js'",
+    "test": "npm run test-only",
+    "prebuild": "rimraf dist",
+    "build": "babel src --out-dir dist --ignore /__tests__/",
+    "prepublish": "npm run build",
+    "release": "npmpub"
+  },
+  "ava": {
+    "require": "babel-register",
+    "concurrency": 5,
+    "babel": "inherit"
+  },
+  "babel": {
+    "presets": [
+      [
+        "env",
         {
-            "name": "Alexander Krasnoyarov",
-            "email": "alexander.krasnoyarov@itgalaxy.company",
-            "url": "https://vk.com/sterling_archer"
+          "targets": {
+            "node": "4.3"
+          }
         }
+      ]
+    ]
+  },
+  "remarkConfig": {
+    "plugins": [
+      "remark-preset-lint-itgalaxy"
+    ]
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "sourceType": "script"
+    },
+    "rules": {
+      "sort-keys": "off"
+    },
+    "extends": [
+      "plugin:itgalaxy/ava",
+      "plugin:itgalaxy/esnext",
+      "plugin:itgalaxy/node"
     ],
-    "repository": {
-        "type": "https",
-        "url": "https://github.com/itgalaxy/generate-robotstxt"
-    },
-    "keywords": [
-        "robotstxt",
-        "robots.txt",
-        "generate",
-        "robots-txt",
-        "user-agent",
-        "police"
-    ],
-    "bugs": {
-        "url": "https://github.com/itgalaxy/generate-robotstxt/issues"
-    },
-    "main": "dist/index.js",
-    "bin": "dist/cli.js",
-    "files": [
-        "dist"
-    ],
-    "license": "MIT",
-    "dependencies": {
-        "meow": "^3.3.0",
-        "resolve-from": "^4.0.0",
-        "ip-address": "^5.8.6",
-        "is-absolute-url": "^2.1.0"
-    },
-    "devDependencies": {
-        "ava": "^0.23.0",
-        "babel-preset-env": "^1.6.0",
-        "babel-register": "^6.9.0",
-        "npm-run-all": "^4.0.0",
-        "npmpub": "^3.1.0",
-        "eslint": "^4.9.0",
-        "eslint-plugin-ava": "^4.2.1",
-        "eslint-plugin-import": "^2.8.0",
-        "eslint-plugin-itgalaxy": "^56.0.0",
-        "eslint-plugin-jest": "^21.2.0",
-        "eslint-plugin-jsx-a11y": "^6.0.0",
-        "eslint-plugin-lodash": "^2.4.3",
-        "eslint-plugin-node": "^5.1.0",
-        "eslint-plugin-prettier": "^2.1.2",
-        "eslint-plugin-promise": "^3.6.0",
-        "eslint-plugin-react": "^7.1.0",
-        "eslint-plugin-unicorn": "^2.1.2",
-        "execa": "^0.8.0",
-        "remark-cli": "^4.0.0",
-        "remark-preset-lint-itgalaxy": "^11.0.0",
-        "rimraf": "^2.5.2",
-        "nyc": "^11.0.1",
-        "tempfile": "^2.0.0",
-        "path-exists": "^3.0.0",
-        "husky": "^0.14.0",
-        "lint-staged": "^4.0.0",
-        "prettier": "^1.5.2"
-    },
-    "scripts": {
-        "precommit": "lint-staged",
-        "lint:prettier": "prettier --list-different '{src,__tests__}/**/*.{js,jsx}' '*.js'",
-        "lint:remark": "remark . -i .gitignore -f -q",
-        "lint:eslint": "eslint . '.*.js' --ignore-path .gitignore --ext '.js,.jsx'",
-        "lint": "npm-run-all -l -p 'lint:**'",
-        "fix:prettier": "prettier --write '{src,__tests__}/**/*.{js,jsx}' '*.js'",
-        "fix:eslint": "eslint . '.*.js' --fix --ignore-path .gitignore --ext '.js,.jsx'",
-        "fix": "npm-run-all -l -p 'fix:**'",
-        "pretest": "npm run lint",
-        "test-only": "nyc ava --verbose '**/__tests__/*.js'",
-        "test": "npm run test-only",
-        "release": "npmpub"
-    },
-    "ava": {
-        "require": "babel-register",
-        "concurrency": 5,
-        "babel": "inherit"
-    },
-    "babel": {
-        "presets": [
-            [
-                "env",
-                {
-                    "targets": {
-                        "node": "4.3"
-                    }
-                }
-            ]
-        ]
-    },
-    "remarkConfig": {
-        "plugins": [
-            "remark-preset-lint-itgalaxy"
-        ]
-    },
-    "eslintConfig": {
+    "overrides": [
+      {
+        "files": [
+          "**/__tests__/**/*.js",
+          "src/**/*.js"
+        ],
         "parserOptions": {
-            "sourceType": "script"
+          "sourceType": "module"
         },
         "rules": {
-            "sort-keys": "off"
-        },
-        "extends": [
-            "plugin:itgalaxy/ava",
-            "plugin:itgalaxy/esnext",
-            "plugin:itgalaxy/node"
-        ],
-        "overrides": [
-            {
-                "files": [
-                    "**/__tests__/**/*.js",
-                    "src/**/*.js"
-                ],
-                "parserOptions": {
-                    "sourceType": "module"
-                },
-                "rules": {
-                    "node/no-unsupported-features": "off"
-                }
-            }
-        ],
-        "root": true
-    },
-    "engines": {
-        "node": ">= 4.3 < 5.0.0 || >= 5.10"
-    }
+          "node/no-unsupported-features": "off"
+        }
+      }
+    ],
+    "root": true
+  },
+  "engines": {
+    "node": ">= 4.3 < 5.0.0 || >= 5.10"
+  }
 }

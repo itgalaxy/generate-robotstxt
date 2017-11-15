@@ -393,18 +393,34 @@ test("should throw error if the item in `cleanParam` option not string", t =>
     "String in `cleanParam` option should be a string"
   ));
 
-test("should load a config file", t =>
+test("config option", t =>
   generateRobotstxt({
-    configFile: `${fixturesPath}/config.js`
-  }).then(content => {
-    t.is(content, "User-agent: *\nAllow: /\nHost: some-domain.com\n");
-  }));
-
-test("should load a config file in commonjs format", t =>
-  generateRobotstxt({
-    configFile: `${fixturesPath}/config-commonjs.js`
+    configFile: path.join(fixturesPath, "robots-txt.config.js")
   }).then(content => {
     t.is(content, "User-agent: *\nAllow: /\nHost: some-some-domain.com\n");
-
-    return content;
   }));
+
+test("should throw error if config don't found", t =>
+  t.throws(
+    generateRobotstxt({
+      configFile: path.join(fixturesPath, "not-found.config.js")
+    }).then(content => {
+      t.is(content, "User-agent: *\nAllow: /\nHost: some-some-domain.com\n");
+    })
+  ));
+
+test.serial("should load a config file", t => {
+  const oldProcessCwd = process.cwd();
+
+  process.chdir(fixturesPath);
+
+  return generateRobotstxt()
+    .then(content => {
+      t.is(content, "User-agent: *\nAllow: /\nHost: some-some-domain.com\n");
+    })
+    .then(() => {
+      process.chdir(oldProcessCwd);
+
+      return Promise.resolve();
+    });
+});

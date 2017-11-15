@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import fs from "fs";
+import fs from "fs-extra";
 import meow from "meow";
 import path from "path";
 import resolveFrom from "resolve-from";
@@ -8,9 +8,9 @@ import standalone from "./standalone";
 
 const cli = meow(
   `
-    Usage
-        $ generate-robotstxt [options] <dest>
-    Options
+    Usage generate-robotstxt [options] <dest>
+
+    Options:
        --config  Path to a specific configuration file.
 `,
   {
@@ -46,17 +46,9 @@ Promise.resolve()
   .then(() => Object.assign({}, optionsBase))
   .then(options => standalone(options))
   .then(output => {
-    const dest = cli.input.pop();
+    const dest = path.resolve(cli.input.pop());
 
-    return new Promise((resolve, reject) => {
-      fs.writeFile(dest, output, error => {
-        if (error) {
-          return reject(new Error(error));
-        }
-
-        return resolve(output);
-      });
-    });
+    return Promise.resolve().then(() => fs.outputFile(dest, output));
   })
   .catch(error => {
     console.log(error); // eslint-disable-line no-console

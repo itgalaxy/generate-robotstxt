@@ -17,59 +17,66 @@ npm install --save-dev generate-robotstxt
 ## Usage
 
 ```js
-const robotstxt = require('generate-robotstxt').default;
+import robotstxt from "generate-robotstxt";
 
 robotstxt({
-    policy: [
-        {
-            userAgent: 'Googlebot',
-            allow: '/',
-            disallow: '/search',
-            crawlDelay: 2
-        },
-        {
-            userAgent: '*',
-            allow: '/',
-            disallow: '/search',
-            crawlDelay: 10,
-            cleanParam: 'ref /articles/'
-        }
-    ],
-    sitemap: 'sitemap.xml',
-    host: 'http://example.com'
-})
-  .then((content) => {
-    console.log(content);
-  });
+  policy: [
+    {
+      userAgent: "Googlebot",
+      allow: "/",
+      disallow: "/search",
+      crawlDelay: 2
+    },
+    {
+      userAgent: "*",
+      allow: "/",
+      disallow: "/search",
+      crawlDelay: 10,
+      cleanParam: "ref /articles/"
+    }
+  ],
+  sitemap: "http://example.com/sitemap.xml",
+  host: "http://example.com"
+}).then(content => {
+  console.log(content);
+});
 ```
 
-Or
+## File based configuration
+
+**robots-txt.config.js**
 
 ```js
-import robotstxt from 'generate-robotstxt';
+module.exports = {
+  policy: [
+    {
+      userAgent: "Googlebot",
+      allow: "/",
+      disallow: "/search",
+      crawlDelay: 2
+    },
+    {
+      userAgent: "*",
+      allow: "/",
+      disallow: "/search",
+      crawlDelay: 10,
+      cleanParam: "ref /articles/"
+    }
+  ],
+  sitemap: "http://example.com/sitemap.xml",
+  host: "http://example.com"
+};
+```
 
-robotstxt({
-    policy: [
-        {
-            userAgent: 'Googlebot',
-            allow: '/',
-            disallow: '/search',
-            crawlDelay: 2
-        },
-        {
-            userAgent: '*',
-            allow: '/',
-            disallow: '/search',
-            crawlDelay: 10,
-            cleanParam: 'ref /articles/'
-        }
-    ],
-    sitemap: 'http://example.com/sitemap.xml',
-    host: 'http://example.com'
-})
-  .then((content) => {
-    console.log(content);
-  });
+## CLI
+
+```shell
+Awesome generator robots.txt
+
+  Usage generate-robotstxt [options] <dest>
+
+  Options:
+     --config  Path to a specific configuration file.
 ```
 
 ## Contribution
