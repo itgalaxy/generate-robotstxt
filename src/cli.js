@@ -14,13 +14,11 @@ const cli = meow(
        --config  Path to a specific configuration file.
 `,
   {
-    alias: {
-      /* eslint-disable id-length */
-      h: "help",
-      v: "version"
-      /* eslint-enable id-length */
-    },
-    string: ["config"]
+    flags: {
+      config: {
+        type: "string"
+      }
+    }
   }
 );
 
@@ -38,14 +36,14 @@ if (cli.flags.config) {
     path.join(process.cwd(), cli.flags.config);
 }
 
-if (cli.input.length === 0) {
-  throw new Error("Require `dest` argument");
-}
-
 Promise.resolve()
   .then(() => Object.assign({}, optionsBase))
   .then(options => standalone(options))
   .then(output => {
+    if (cli.input.length === 0) {
+      throw new Error("Require `dest` argument");
+    }
+
     const dest = path.resolve(cli.input.pop());
 
     return Promise.resolve().then(() => fs.outputFile(dest, output));
