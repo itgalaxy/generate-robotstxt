@@ -6,7 +6,7 @@ This project adheres to [Semantic Versioning](http://semver.org).
 
 ## 5.0.1 - 2017-11-28
 
-* Chore: minimum required `meow` version is now `4.0.0`.
+* Chore: minimum required `meow` version is now `^4.0.0`.
 
 ## 5.0.0 - 2017-11-15
 
