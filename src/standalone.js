@@ -36,11 +36,23 @@ function generatePoliceItem(item, index) {
   contents += addLine("User-agent", item.userAgent);
 
   if (item.allow) {
-    contents += addLine("Allow", item.allow);
+    if (Array.isArray(item.allow)) {
+      item.allow.forEach((allowed) => {
+        contents += addLine("Allow", allowed);
+      });
+    } else {
+      contents += addLine("Allow", item.allow);
+    }
   }
 
   if (item.disallow) {
-    contents += addLine("Disallow", item.disallow);
+    if (Array.isArray(item.disallow)) {
+      item.disallow.forEach((disallowed) => {
+        contents += addLine("Disallow", disallowed);
+      });
+    } else {
+      contents += addLine("Disallow", item.disallow);
+    }
   }
 
   if (item.crawlDelay) {

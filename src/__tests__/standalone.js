@@ -22,6 +22,30 @@ test("should `contain one `policy` item with the `Allow` directive", t =>
     t.is(content, "User-agent: Google\nAllow: /\n");
   }));
 
+test("should `contain one `policy` item with two `Allow` directives", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        allow: ["/", "/test"],
+        userAgent: "Google"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: Google\nAllow: /\nAllow: /test\n");
+  }));
+
+test("should `contain one `policy` item with two `Disallow` directives", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        disallow: ["/", "/test"],
+        userAgent: "Google"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: Google\nDisallow: /\nDisallow: /test\n");
+  }));
+
 test("should contain two `policy` item with the `Allow` directive", t =>
   generateRobotstxt({
     policy: [
@@ -38,6 +62,44 @@ test("should contain two `policy` item with the `Allow` directive", t =>
     t.is(
       content,
       "User-agent: Google\nAllow: /\n\nUser-agent: Yandex\nAllow: /\n"
+    );
+  }));
+
+test("should contain two `policy` items with two `Allow` directives", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        allow: ["/", "/test"],
+        userAgent: "Google"
+      },
+      {
+        allow: ["/", "/test"],
+        userAgent: "Yandex"
+      }
+    ]
+  }).then(content => {
+    t.is(
+      content,
+      "User-agent: Google\nAllow: /\nAllow: /test\n\nUser-agent: Yandex\nAllow: /\nAllow: /test\n"
+    );
+  }));
+
+test("should contain two `policy` items with two `Disallow` directives", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        disallow: ["/", "/test"],
+        userAgent: "Google"
+      },
+      {
+        disallow: ["/", "/test"],
+        userAgent: "Yandex"
+      }
+    ]
+  }).then(content => {
+    t.is(
+      content,
+      "User-agent: Google\nDisallow: /\nDisallow: /test\n\nUser-agent: Yandex\nDisallow: /\nDisallow: /test\n"
     );
   }));
 
