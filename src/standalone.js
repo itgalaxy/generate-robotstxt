@@ -37,7 +37,7 @@ function generatePoliceItem(item, index) {
 
   if (item.allow) {
     if (Array.isArray(item.allow)) {
-      item.allow.forEach((allowed) => {
+      item.allow.forEach(allowed => {
         contents += addLine("Allow", allowed);
       });
     } else {
@@ -47,7 +47,7 @@ function generatePoliceItem(item, index) {
 
   if (item.disallow) {
     if (Array.isArray(item.disallow)) {
-      item.disallow.forEach((disallowed) => {
+      item.disallow.forEach(disallowed => {
         contents += addLine("Disallow", disallowed);
       });
     } else {
