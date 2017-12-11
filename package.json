@@ -37,7 +37,7 @@
     "resolve-from": "^4.0.0",
     "ip-address": "^5.8.6",
     "is-absolute-url": "^2.1.0",
-    "fs-extra": "^4.0.2"
+    "fs-extra": "^5.0.0"
   },
   "devDependencies": {
     "ava": "^0.24.0",
