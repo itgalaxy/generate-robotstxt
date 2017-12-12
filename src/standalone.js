@@ -54,21 +54,19 @@ function generatePoliceItem(item, index) {
   return contents;
 }
 
-export default function(
-  {
-    configFile = null,
-    policy = [
-      {
-        allow: "/",
-        cleanParam: null,
-        crawlDelay: null,
-        userAgent: "*"
-      }
-    ],
-    sitemap = null,
-    host = null
-  } = {}
-) {
+export default function({
+  configFile = null,
+  policy = [
+    {
+      allow: "/",
+      cleanParam: null,
+      crawlDelay: null,
+      userAgent: "*"
+    }
+  ],
+  sitemap = null,
+  host = null
+} = {}) {
   let options = {
     host,
     policy,

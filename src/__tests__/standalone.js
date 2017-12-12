@@ -10,7 +10,7 @@ test("should generated default output without options", t =>
     t.is(content, "User-agent: *\nAllow: /\n");
   }));
 
-test("should `contain one `policy` item with the `Allow` directive", t =>
+test("should contain one `policy` item with the `Allow` directive", t =>
   generateRobotstxt({
     policy: [
       {
@@ -20,6 +20,30 @@ test("should `contain one `policy` item with the `Allow` directive", t =>
     ]
   }).then(content => {
     t.is(content, "User-agent: Google\nAllow: /\n");
+  }));
+
+test("should contain two `policy` items with the `Allow` directive", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        allow: ["/", "/foobar"],
+        userAgent: "Google"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: Google\nAllow: /\nAllow: /foobar\n");
+  }));
+
+test("should contain two `policy` items with the `Disallow` directive", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        disallow: ["/", "/foobar"],
+        userAgent: "Google"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: Google\nDisallow: /\nDisallow: /foobar\n");
   }));
 
 test("should contain two `policy` item with the `Allow` directive", t =>

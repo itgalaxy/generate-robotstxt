@@ -28,6 +28,12 @@ robotstxt({
       crawlDelay: 2
     },
     {
+      userAgent: "OtherBot",
+      allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
+      disallow: ["/admin", "/login"],
+      crawlDelay: 2
+    },
+    {
       userAgent: "*",
       allow: "/",
       disallow: "/search",
@@ -52,7 +58,13 @@ module.exports = {
     {
       userAgent: "Googlebot",
       allow: "/",
-      disallow: "/search",
+      disallow: ["/search"],
+      crawlDelay: 2
+    },
+    {
+      userAgent: "OtherBot",
+      allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
+      disallow: ["/admin", "/login"],
       crawlDelay: 2
     },
     {
