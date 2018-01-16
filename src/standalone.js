@@ -89,6 +89,7 @@ export default function({
     })
     .then(
       () =>
+        // eslint-disable-next-line complexity
         new Promise(resolve => {
           if (options.policy) {
             if (!Array.isArray(options.policy)) {
