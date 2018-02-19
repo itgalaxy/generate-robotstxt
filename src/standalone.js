@@ -153,9 +153,7 @@ export default function({
               typeof options.sitemap === "string" &&
               !isAbsoluteUrl(options.sitemap)
             ) {
-              throw new Error(
-                "Option `sitemap` should be an absolute URL"
-              );
+              throw new Error("Option `sitemap` should be an absolute URL");
             } else if (Array.isArray(options.sitemap)) {
               options.sitemap.forEach(item => {
                 if (typeof item === "string" && !isAbsoluteUrl(item)) {

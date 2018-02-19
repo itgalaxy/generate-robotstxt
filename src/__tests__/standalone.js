@@ -140,7 +140,7 @@ test("should throw error if the `policy` option not have the `userAgent` option"
     generateRobotstxt({
       policy: [{}]
     }),
-    "Each `police` should have a single string `userAgent` option"
+    "Each `policy` should have a single string `userAgent` option"
   ));
 
 test("should throw error if the `policy` option have array the `userAgent` option", t =>
@@ -152,7 +152,7 @@ test("should throw error if the `policy` option have array the `userAgent` optio
         }
       ]
     }),
-    "Each `police` should have a single string `userAgent` option"
+    "Each `policy` should have a single string `userAgent` option"
   ));
 
 test("should contain the `Sitemap` directive", t =>
@@ -178,7 +178,7 @@ test("should throw error if the `sitemap` option is not absolute URL", t =>
     generateRobotstxt({
       sitemap: "sitemap.xml"
     }),
-    "Option `sitemap` should be have an absolute URL"
+    "Option `sitemap` should be an absolute URL"
   ));
 
 test("should throw error if item in the `sitemap` option not a string or an array", t =>
@@ -372,7 +372,7 @@ test("should throw error if the `cleanParam` option more than 500 characters", t
         }
       ]
     }),
-    "Option `cleanParam` should be less or equal 500 characters"
+    "Option `cleanParam` should have no more than 500 characters"
   ));
 
 test("should throw error if the item in `cleanParam` option more than 500 characters", t =>
@@ -386,7 +386,7 @@ test("should throw error if the item in `cleanParam` option more than 500 charac
         }
       ]
     }),
-    "String in `cleanParam` option should be less or equal 500 characters"
+    "String in `cleanParam` option should have no more than 500 characters"
   ));
 
 test("should throw error if the `cleanParam` option not string or array", t =>
