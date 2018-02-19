@@ -102,7 +102,7 @@ export default function({
                 (item.userAgent && item.userAgent.length === 0)
               ) {
                 throw new Error(
-                  "Each `police` should have a single string `userAgent` option"
+                  "Each `policy` should have a single string `userAgent` option"
                 );
               }
 
@@ -122,13 +122,13 @@ export default function({
                   item.cleanParam.length > 500
                 ) {
                   throw new Error(
-                    "Option `cleanParam` should be less or equal 500 characters"
+                    "Option `cleanParam` should have no more than 500 characters"
                   );
                 } else if (Array.isArray(item.cleanParam)) {
                   item.cleanParam.forEach(subItem => {
                     if (typeof subItem === "string" && subItem.length > 500) {
                       throw new Error(
-                        "String in `cleanParam` option should be less or equal 500 characters"
+                        "String in `cleanParam` option should have no more than 500 characters"
                       );
                     } else if (typeof subItem !== "string") {
                       throw new Error(
@@ -154,7 +154,7 @@ export default function({
               !isAbsoluteUrl(options.sitemap)
             ) {
               throw new Error(
-                "Option `sitemap` should be have an absolute URL"
+                "Option `sitemap` should be an absolute URL"
               );
             } else if (Array.isArray(options.sitemap)) {
               options.sitemap.forEach(item => {
