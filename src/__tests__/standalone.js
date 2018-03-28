@@ -22,7 +22,7 @@ test("should contain one `policy` item with the `Allow` directive", t =>
     t.is(content, "User-agent: Google\nAllow: /\n");
   }));
 
-test("should contain two `policy` items with the `Allow` directive", t =>
+test("should contain one `policy` items with the `Allow` directive", t =>
   generateRobotstxt({
     policy: [
       {
@@ -34,7 +34,7 @@ test("should contain two `policy` items with the `Allow` directive", t =>
     t.is(content, "User-agent: Google\nAllow: /\nAllow: /foobar\n");
   }));
 
-test("should contain two `policy` items with the `Disallow` directive", t =>
+test("should contain one `policy` items with the `Disallow` directive", t =>
   generateRobotstxt({
     policy: [
       {
@@ -448,3 +448,34 @@ test.serial("should load a config file", t => {
       return Promise.resolve();
     });
 });
+
+test("should contain two `policy` items with empty `Disallow` directive", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        allow: "",
+        disallow: "",
+        userAgent: "*"
+      },
+      {
+        allow: "",
+        disallow: [""],
+        userAgent: "Foo"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: *\nDisallow:\n\nUser-agent: Foo\nDisallow:\n");
+  }));
+
+test("should contain one policy item without empty `Clean-param` option", t =>
+  generateRobotstxt({
+    policy: [
+      {
+        allow: "/",
+        cleanParam: [],
+        userAgent: "Yandex"
+      }
+    ]
+  }).then(content => {
+    t.is(content, "User-agent: Yandex\nAllow: /\n");
+  }));

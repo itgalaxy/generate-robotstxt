@@ -10,17 +10,19 @@ function capitaliseFirstLetter(string) {
 function addLine(name, rule) {
   let contents = "";
 
-  if (rule && Object.prototype.toString.call(rule) === "[object Array]") {
+  if (rule && Array.isArray(rule) && rule.length > 0) {
     rule.forEach(item => {
       contents += addLine(name, item);
     });
   } else {
-    const ruleContent =
-      name === "Allow" || name === "Disallow" ? encodeURI(rule) : rule;
+    const ruleContent = (name === "Allow" || name === "Disallow"
+      ? encodeURI(rule)
+      : rule
+    ).toString();
 
     contents += `${capitaliseFirstLetter(
       name.replace(/([a-z])([A-Z])/g, "$1-$2").toLowerCase()
-    )}: ${ruleContent}\n`;
+    )}:${ruleContent.length > 0 ? ` ${ruleContent}` : ""}\n`;
   }
 
   return contents;
@@ -39,7 +41,7 @@ function generatePoliceItem(item, index) {
     contents += addLine("Allow", item.allow);
   }
 
-  if (item.disallow) {
+  if (typeof item.disallow === "string" || Array.isArray(item.disallow)) {
     contents += addLine("Disallow", item.disallow);
   }
 
@@ -47,7 +49,9 @@ function generatePoliceItem(item, index) {
     contents += addLine("Crawl-delay", item.crawlDelay);
   }
 
-  if (item.cleanParam) {
+  // Move from policy for next master version
+  // https://yandex.ru/support/webmaster/controlling-robot/robots-txt.html
+  if (item.cleanParam && item.cleanParam.length > 0) {
     contents += addLine("Clean-param", item.cleanParam);
   }
 
@@ -97,10 +101,7 @@ export default function({
             }
 
             options.policy.forEach(item => {
-              if (
-                !item.userAgent ||
-                (item.userAgent && item.userAgent.length === 0)
-              ) {
+              if (!item.userAgent || item.userAgent.length === 0) {
                 throw new Error(
                   "Each `policy` should have a single string `userAgent` option"
                 );

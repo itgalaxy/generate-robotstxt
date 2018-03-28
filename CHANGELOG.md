@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 5.0.5 - 2018-03-28
+
+* Fix: allow empty values `Disallow` directive (according [official spec](http://www.robotstxt.org/orig.html)).
+* Fix: don't generate empty `Clean-param`.
+
 ## 5.0.4 - 2018-01-16
 
 * Fix: typo in source code message errors.
