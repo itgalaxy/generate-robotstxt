@@ -1,6 +1,6 @@
 {
   "name": "generate-robotstxt",
-  "version": "5.0.5",
+  "version": "5.0.6",
   "description": "Awesome generator robots.txt",
   "author": "itgalaxy <development@itgalaxy.company>",
   "contributors": [
@@ -38,11 +38,11 @@
   "license": "MIT",
   "dependencies": {
     "cosmiconfig": "^4.0.0",
-    "meow": "^4.0.0",
+    "meow": "^5.0.0",
     "resolve-from": "^4.0.0",
     "ip-address": "^5.8.6",
     "is-absolute-url": "^2.1.0",
-    "fs-extra": "^5.0.0"
+    "fs-extra": "^6.0.0"
   },
   "devDependencies": {
     "ava": "^0.25.0",
@@ -55,7 +55,7 @@
     "eslint": "^4.9.0",
     "eslint-plugin-ava": "^4.2.1",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-itgalaxy": "^66.0.0",
+    "eslint-plugin-itgalaxy": "^67.0.0",
     "eslint-plugin-jest": "^21.2.0",
     "eslint-plugin-jsx-a11y": "^6.0.0",
     "eslint-plugin-lodash": "^2.4.3",

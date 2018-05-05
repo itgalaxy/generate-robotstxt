@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 5.0.6 - 2018-05-05
+
+* Fix: throw error when `policy` option is `null`.
+* Chore: minimum required `meow` version is now `^5.0.0`.
+* Chore: minimum required `node-fs` version is now `^6.0.0`.
+
 ## 5.0.5 - 2018-03-28
 
 * Fix: allow empty values `Disallow` directive (according [official spec](http://www.robotstxt.org/orig.html)).

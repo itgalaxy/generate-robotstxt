@@ -147,6 +147,8 @@ export default function({
                 }
               }
             });
+          } else {
+            throw new Error("Options `policy` should be define");
           }
 
           if (options.sitemap) {

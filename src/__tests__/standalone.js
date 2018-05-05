@@ -127,12 +127,20 @@ test("should use encode url in the `allow` and the `disallow` options", t =>
     );
   }));
 
-test("should throw error if the `policy` option is not array", t =>
+test("should throw error if the `policy` option is string", t =>
   t.throws(
     generateRobotstxt({
       policy: "string"
     }),
     "Options `policy` must be array"
+  ));
+
+test("should throw error if the `policy` option is null", t =>
+  t.throws(
+    generateRobotstxt({
+      policy: null
+    }),
+    "Options `policy` should be define"
   ));
 
 test("should throw error if the `policy` option not have the `userAgent` option", t =>

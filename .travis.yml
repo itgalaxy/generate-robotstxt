@@ -17,10 +17,10 @@ cache:
 
 matrix:
   include:
-    - node_js: '9'
+    - node_js: '10'
       script: npm run pretest
       env: CI=pretest
-    - node_js: '9'
+    - node_js: '10'
       script: npm run test-only
       env: CI=tests 8
     - node_js: '8'
@@ -35,4 +35,4 @@ matrix:
       sudo: required
 
 before_install:
-  - npm install -g npm@latest
+  - npm install -g npm@5
