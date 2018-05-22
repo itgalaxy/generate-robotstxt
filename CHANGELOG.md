@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 5.0.7 - 2018-05-22
+
+* Chore: minimum required `cosmiconfig` version is now `^5.0.0`.
+
 ## 5.0.6 - 2018-05-05
 
 * Fix: throw error when `policy` option is `null`.

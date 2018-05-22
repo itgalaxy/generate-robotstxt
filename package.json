@@ -1,6 +1,6 @@
 {
   "name": "generate-robotstxt",
-  "version": "5.0.6",
+  "version": "5.0.7",
   "description": "Awesome generator robots.txt",
   "author": "itgalaxy <development@itgalaxy.company>",
   "contributors": [
@@ -37,7 +37,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "cosmiconfig": "^4.0.0",
+    "cosmiconfig": "^5.0.0",
     "meow": "^5.0.0",
     "resolve-from": "^4.0.0",
     "ip-address": "^5.8.6",

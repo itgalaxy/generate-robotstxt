@@ -1,6 +1,7 @@
 import { Address4, Address6 } from "ip-address";
 import cosmiconfig from "cosmiconfig";
 import isAbsoluteUrl from "is-absolute-url";
+import path from "path";
 import url from "url";
 
 function capitaliseFirstLetter(string) {
@@ -58,6 +59,29 @@ function generatePoliceItem(item, index) {
   return contents;
 }
 
+function buildConfig(configFile = null) {
+  let searchPath = process.cwd();
+  let configPath = null;
+
+  if (configFile) {
+    searchPath = null;
+    configPath = path.resolve(process.cwd(), configFile);
+  }
+
+  const configExplorer = cosmiconfig("robots-txt");
+  const searchForConfig = configPath
+    ? configExplorer.load(configPath)
+    : configExplorer.search(searchPath);
+
+  return searchForConfig.then(result => {
+    if (!result) {
+      return {};
+    }
+
+    return result;
+  });
+}
+
 export default function({
   configFile = null,
   policy = [
@@ -78,19 +102,15 @@ export default function({
   };
 
   return Promise.resolve()
-    .then(() => {
-      const explorer = cosmiconfig("robots-txt", {
-        rcExtensions: true
-      });
-
-      return explorer.load(process.cwd(), configFile).then(result => {
-        if (result) {
-          options = Object.assign({}, options, result.config);
-        }
+    .then(() =>
+      buildConfig(configFile).then(result => {
+        // Need avoid this behaviour in next major release
+        // Load config file when it is passed or options were set
+        options = Object.assign({}, options, result.config);
 
         return Promise.resolve();
-      });
-    })
+      })
+    )
     .then(
       () =>
         // eslint-disable-next-line complexity
