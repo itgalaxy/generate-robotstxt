@@ -1,7 +1,6 @@
-import generateRobotstxt from "../standalone";
 import path from "path";
-// eslint-disable-next-line node/no-unpublished-import
 import test from "ava";
+import generateRobotstxt from "../src/standalone";
 
 const fixturesPath = path.join(__dirname, "fixtures");
 
