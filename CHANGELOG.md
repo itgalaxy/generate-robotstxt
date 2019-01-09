@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 6.0.0 - 2019-01-09
+
+- Chore: minimum required `node-fs` version is now `^7.0.1`.
+
+### BREAKING CHANGE
+
+- Chore: minimum required `nodejs` version is now `>= 6.9.0`.
+
 ## 5.0.7 - 2018-05-22
 
 - Chore: minimum required `cosmiconfig` version is now `^5.0.0`.
