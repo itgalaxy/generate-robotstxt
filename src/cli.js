@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
+import path from "path";
 import fs from "fs-extra";
 import meow from "meow";
-import path from "path";
 import resolveFrom from "resolve-from";
 import standalone from "./standalone";
 
@@ -50,5 +50,5 @@ Promise.resolve()
   })
   .catch(error => {
     console.log(error); // eslint-disable-line no-console
-    process.exit(error.code || 1); // eslint-disable-line no-process-exit
+    process.exit(error.code || 1);
   });

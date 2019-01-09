@@ -1,8 +1,8 @@
+import path from "path";
+import url from "url";
 import { Address4, Address6 } from "ip-address";
 import cosmiconfig from "cosmiconfig";
 import isAbsoluteUrl from "is-absolute-url";
-import path from "path";
-import url from "url";
 
 function capitaliseFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
@@ -229,6 +229,7 @@ export default function({
               normalizeHost = `http://${host}`;
             }
 
+            // eslint-disable-next-line node/no-deprecated-api
             const parsedURL = url.parse(normalizeHost, false, true);
 
             if (!parsedURL.host) {
