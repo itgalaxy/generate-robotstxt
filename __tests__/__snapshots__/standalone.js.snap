@@ -1,0 +1,219 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`standalone config option 1`] = `
+"User-agent: *
+Allow: /
+Host: some-some-domain.com
+"
+`;
+
+exports[`standalone should \`contain the \`Host\` 1`] = `
+"User-agent: *
+Allow: /
+Host: domain.com
+"
+`;
+
+exports[`standalone should \`contain two \`Sitemap\` directives 1`] = `
+"User-agent: *
+Allow: /
+Sitemap: http://foobar.com/sitemap.xml
+Sitemap: http://foobar.com/sitemap1.xml
+"
+`;
+
+exports[`standalone should \`contain two \`policy\` item with the \`Allow\` and the \`Disallow\` directives 1`] = `
+"User-agent: Google
+Allow: /
+Disallow: /search-foo
+
+User-agent: Yandex
+Allow: /
+Disallow: /search-bar
+"
+`;
+
+exports[`standalone should \`contain two policy item, first have multiple \`User-agent\` option 1`] = `
+"User-agent: Google
+User-agent: AnotherBot
+Allow: /
+Disallow: /search-foo
+
+User-agent: Yandex
+Allow: /
+Disallow: /search-bar
+"
+`;
+
+exports[`standalone should contain multiple \`User-agent\` and \`Crawl-delay\` 1`] = `
+"User-agent: Google
+Allow: /
+Crawl-delay: 10
+
+User-agent: Yandex
+Allow: /
+Crawl-delay: 0.5
+"
+`;
+
+exports[`standalone should contain one \`policy\` item with the \`Allow\` directive 1`] = `
+"User-agent: Google
+Allow: /
+"
+`;
+
+exports[`standalone should contain one \`policy\` items with the \`Allow\` directive 1`] = `
+"User-agent: Google
+Allow: /
+Allow: /foobar
+"
+`;
+
+exports[`standalone should contain one \`policy\` items with the \`Disallow\` directive 1`] = `
+"User-agent: Google
+Disallow: /
+Disallow: /foobar
+"
+`;
+
+exports[`standalone should contain one policy item with one \`Clean-param\` option 1`] = `
+"User-agent: Yandex
+Allow: /
+Clean-param: s /forum/showthread.php
+"
+`;
+
+exports[`standalone should contain one policy item with two \`Clean-params\` options 1`] = `
+"User-agent: Yandex
+Allow: /
+Clean-param: s /forum/showthread.php
+Clean-param: ref /forum/showthread.php
+"
+`;
+
+exports[`standalone should contain one policy item without empty \`Clean-param\` option 1`] = `
+"User-agent: Yandex
+Allow: /
+"
+`;
+
+exports[`standalone should contain the \`Host\` if \`host\` options without protocol scheme 1`] = `
+"User-agent: *
+Allow: /
+Host: www.domain.com
+"
+`;
+
+exports[`standalone should contain the \`Host\` in punycode format 1`] = `
+"User-agent: *
+Allow: /
+Host: xn----8sbalhasbh9ahbi6a2ae.xn--p1ai
+"
+`;
+
+exports[`standalone should contain the \`Host\` with \`https\` scheme 1`] = `
+"User-agent: *
+Allow: /
+Host: https://domain.com
+"
+`;
+
+exports[`standalone should contain the \`Host\` without \`80\` port 1`] = `
+"User-agent: *
+Allow: /
+Host: domain.com
+"
+`;
+
+exports[`standalone should contain the \`Host\` without a trailing slash 1`] = `
+"User-agent: *
+Allow: /
+Host: domain.com
+"
+`;
+
+exports[`standalone should contain the \`Host\` without any extra URL entire 1`] = `
+"User-agent: *
+Allow: /
+Host: www.domain.com:8080
+"
+`;
+
+exports[`standalone should contain the \`Sitemap\` directive 1`] = `
+"User-agent: *
+Allow: /
+Sitemap: http://foobar.com/sitemap.xml
+"
+`;
+
+exports[`standalone should contain two \`policy\` item with the \`Allow\` directive 1`] = `
+"User-agent: Google
+Allow: /
+
+User-agent: Yandex
+Allow: /
+"
+`;
+
+exports[`standalone should contain two \`policy\` items with empty \`Disallow\` directive 1`] = `
+"User-agent: *
+Disallow:
+
+User-agent: Foo
+Disallow:
+"
+`;
+
+exports[`standalone should generated default output without options 1`] = `
+"User-agent: *
+Allow: /
+"
+`;
+
+exports[`standalone should load a config file 1`] = `
+"User-agent: *
+Allow: /
+Host: some-some-domain.com
+"
+`;
+
+exports[`standalone should throw error if item in the \`sitemap\` option not a string or an array 1`] = `"Item in \`sitemap\` option should be a string"`;
+
+exports[`standalone should throw error if item in the \`sitemap\` option not an absolute URL 1`] = `"Item in \`sitemap\` option should be an absolute URL"`;
+
+exports[`standalone should throw error if the \`Host\` option is array 1`] = `"Options \`host\` must be only one string"`;
+
+exports[`standalone should throw error if the \`cleanParam\` option more than 500 characters 1`] = `"Option \`cleanParam\` should have no more than 500 characters"`;
+
+exports[`standalone should throw error if the \`cleanParam\` option not string or array 1`] = `"Option \`cleanParam\` should be a string or an array"`;
+
+exports[`standalone should throw error if the \`host\` option being IP address version 4 1`] = `"Options \`host\` should be not an IP address"`;
+
+exports[`standalone should throw error if the \`host\` option being IP address version 6 1`] = `"Options \`host\` should be not an IP address"`;
+
+exports[`standalone should throw error if the \`policy\` option have array the \`userAgent\` option 1`] = `"Each \`policy\` should have a single string \`userAgent\` option"`;
+
+exports[`standalone should throw error if the \`policy\` option is null 1`] = `"Options \`policy\` should be define"`;
+
+exports[`standalone should throw error if the \`policy\` option is string 1`] = `"Options \`policy\` must be array"`;
+
+exports[`standalone should throw error if the \`policy\` option not have the \`userAgent\` option 1`] = `"Each \`policy\` should have a single string \`userAgent\` option"`;
+
+exports[`standalone should throw error if the \`sitemap\` option is not absolute URL 1`] = `"Option \`sitemap\` should be an absolute URL"`;
+
+exports[`standalone should throw error if the \`sitemap\` option is not string or array 1`] = `"Option \`sitemap\` should be a string or an array"`;
+
+exports[`standalone should throw error if the item in \`cleanParam\` option more than 500 characters 1`] = `"String in \`cleanParam\` option should have no more than 500 characters"`;
+
+exports[`standalone should throw error if the item in \`cleanParam\` option not string 1`] = `"String in \`cleanParam\` option should be a string"`;
+
+exports[`standalone should throw error on invalid \`crawlDelay\` option 1`] = `"Option \`crawlDelay\` must be an integer or a float"`;
+
+exports[`standalone should throw error on invalid \`host\` option 1`] = `"Option \`host\` does not contain correct host"`;
+
+exports[`standalone should use encode url in the \`allow\` and the \`disallow\` options 1`] = `
+"User-agent: Google
+Allow: /%D0%BA%D0%BE%D1%80%D0%B7%D0%B8%D0%BD%D0%B0
+Disallow: /%D0%BB%D0%B8%D1%87%D0%BD%D1%8B%D0%B9-%D0%BA%D0%B0%D0%B1%D0%B8%D0%BD%D0%B5%D1%82
+"
+`;
