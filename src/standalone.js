@@ -1,6 +1,6 @@
 import path from "path";
 import url from "url";
-import { Address4, Address6 } from "ip-address";
+import ipRegex from "ip-regex";
 import cosmiconfig from "cosmiconfig";
 import isAbsoluteUrl from "is-absolute-url";
 
@@ -113,7 +113,6 @@ export default function({
     )
     .then(
       () =>
-        // eslint-disable-next-line complexity
         new Promise(resolve => {
           if (options.policy) {
             if (!Array.isArray(options.policy)) {
@@ -204,10 +203,7 @@ export default function({
               throw new Error("Options `host` must be only one string");
             }
 
-            const address4 = new Address4(options.host);
-            const address6 = new Address6(options.host);
-
-            if (address4.isValid() || address6.isValid()) {
+            if (ipRegex({ exact: true }).test(options.host)) {
               throw new Error("Options `host` should be not an IP address");
             }
           }

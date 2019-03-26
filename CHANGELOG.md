@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 6.0.1 - 2019-03-26
+
+- Chore: migrate on `ip-regex` to avoid lodash vulnerable libraries
+
 ## 6.0.0 - 2019-01-09
 
 - Chore: minimum required `node-fs` version is now `^7.0.1`.
