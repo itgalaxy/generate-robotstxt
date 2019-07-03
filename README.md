@@ -42,9 +42,15 @@ robotstxt({
   ],
   sitemap: "http://example.com/sitemap.xml",
   host: "http://example.com"
-}).then(content => {
-  console.log(content);
-});
+})
+  .then(content => {
+    console.log(content);
+
+    return content;
+  })
+  .catch(error => {
+    throw error;
+  });
 ```
 
 ## File based configuration

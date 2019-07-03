@@ -108,7 +108,7 @@ export default function({
         // Load config file when it is passed or options were set
         options = Object.assign({}, options, result.config);
 
-        return Promise.resolve();
+        return options;
       })
     )
     .then(
