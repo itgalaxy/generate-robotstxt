@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 This project adheres to [Semantic Versioning](http://semver.org).
 
+## 7.0.0 - 2019-07-03
+
+- Changed: minimum require Node.js version is `8.9.0`.
+
 ## 6.0.1 - 2019-03-26
 
 - Chore: migrate on `ip-regex` to avoid lodash vulnerable libraries
@@ -51,8 +55,7 @@ This project adheres to [Semantic Versioning](http://semver.org).
 
 - Changed: use `[cosmiconfig](https://github.com/davidtheclark/cosmiconfig) for
   loading configuration.
-- Feature: in CLI if the parent directory does not exist when you write
-  `robots.txt`, it's created.
+- Feature: in CLI if the parent directory does not exist when you write `robots.txt`, it's created.
 
 ## 4.0.4 - 2017-10-09
 
