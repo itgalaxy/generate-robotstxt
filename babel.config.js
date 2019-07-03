@@ -16,6 +16,14 @@ module.exports = api => {
           }
         }
       ]
+    ],
+    plugins: [
+      [
+        "add-module-exports",
+        {
+          addDefaultProperty: true
+        }
+      ]
     ]
   };
 };
