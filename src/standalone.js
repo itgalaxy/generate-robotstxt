@@ -1,7 +1,7 @@
 import path from "path";
 import url from "url";
 import ipRegex from "ip-regex";
-import cosmiconfig from "cosmiconfig";
+import { cosmiconfig } from "cosmiconfig";
 import isAbsoluteUrl from "is-absolute-url";
 
 function capitaliseFirstLetter(string) {

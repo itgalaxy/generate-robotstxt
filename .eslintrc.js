@@ -1,63 +1,46 @@
 "use strict";
 
 module.exports = {
-  parserOptions: {
-    sourceType: "script"
-  },
-  extends: ["plugin:itgalaxy/esnext", "plugin:itgalaxy/node"],
+  extends: [
+    "plugin:itgalaxy/script",
+    "plugin:itgalaxy/esnext",
+    "plugin:itgalaxy/node"
+  ],
   overrides: [
     // Source
     {
+      extends: ["plugin:itgalaxy/module"],
       // Exclude nested tests
       excludedFiles: ["**/__tests__/**/*", "**/__mocks__/**/*", "**/*.md"],
-      files: ["src/**/*"],
-      parserOptions: {
-        sourceType: "module"
-      },
-      rules: {
-        // Allow to use ECMAScript 6 modules because we use `babel`
-        "node/no-unsupported-features/es-syntax": "off"
-      }
+      files: ["src/**/*"]
     },
 
     // Jest
     {
-      extends: ["plugin:itgalaxy/jest"],
+      extends: ["plugin:itgalaxy/dirty", "plugin:itgalaxy/jest"],
       excludedFiles: ["**/*.md"],
       files: ["**/__tests__/**/*", "**/__mocks__/**/*"],
-      parserOptions: {
-        sourceType: "module"
-      },
       rules: {
         // Allow to use `console` (example - `mocking`)
-        "no-console": "off",
-        // Allow to use ECMAScript 6 modules because we use `babel`
-        "node/no-unsupported-features/es-syntax": "off"
+        "no-console": "off"
       }
     },
 
     // Markdown
     {
-      extends: ["plugin:itgalaxy/markdown"],
+      extends: [
+        // Documentation files can contain ECMA and CommonJS modules
+        "plugin:itgalaxy/dirty",
+        "plugin:itgalaxy/markdown"
+      ],
       files: ["**/*.md"],
-      parserOptions: {
-        sourceType: "module",
-        ecmaFeatures: {
-          impliedStrict: true
-        }
-      },
       rules: {
-        strict: "off",
-        "no-undef": "off",
         "no-unused-vars": "off",
-        "no-process-env": "off",
-        "no-process-exit": "off",
         "no-console": "off",
-        "import/no-unresolved": "off",
         "import/extensions": "off",
+        "import/no-unresolved": "off",
         "node/no-unpublished-require": "off",
-        "node/no-unpublished-import": "off",
-        "node/no-unsupported-features/es-syntax": "off"
+        "node/no-unpublished-import": "off"
       }
     }
   ],
