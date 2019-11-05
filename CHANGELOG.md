@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.0](https://github.com/itgalaxy/generate-robotstxt/compare/v7.1.0...v8.0.0) (2019-07-03)
+
+### Breaking change
+
+* minimum require Node.js version is `10.13.0`.
+
 ## [7.1.0](https://github.com/itgalaxy/generate-robotstxt/compare/v6.0.1...v7.1.0) (2019-07-03)
 
 

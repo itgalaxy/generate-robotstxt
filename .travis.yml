@@ -17,18 +17,18 @@ cache:
 
 matrix:
   include:
-    - node_js: "12"
+    - node_js: "10"
       script: npm run pretest
       env: CI=pretest
-    - node_js: "8"
-      script: npm run test:only
-      env: CI=tests 8
     - node_js: "10"
       script: npm run test:only
       env: CI=tests 10
-    - node_js: "11"
+    - node_js: "12"
       script: npm run test:only
-      env: CI=tests 11
+      env: CI=tests 12
+    - node_js: "13"
+      script: npm run test:only
+      env: CI=tests 13
 
 before_install:
   - npm install -g npm@latest
@@ -39,6 +39,3 @@ install:
 before_script:
   - node --version
   - npm --version
-
-script:
-  - npm run $JOB_PART
