@@ -221,7 +221,7 @@ export default function({
           if (options.host) {
             let normalizeHost = options.host;
 
-            if (normalizeHost.search(/^http[s]?:\/\//) === -1) {
+            if (normalizeHost.search(/^https?:\/\//) === -1) {
               normalizeHost = `http://${host}`;
             }
 

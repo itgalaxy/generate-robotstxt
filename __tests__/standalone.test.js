@@ -1,5 +1,5 @@
 import path from "path";
-import generateRobotstxt from "../src/standalone";
+import generateRobotstxt from "../src/standalone.js";
 
 const fixturesPath = path.join(__dirname, "fixtures");
 
