@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs-extra";
 import meow from "meow";
 import resolveFrom from "resolve-from";
-import standalone from "./standalone";
+import standalone from "./standalone.js";
 
 const cli = meow(
   `

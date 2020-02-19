@@ -12,7 +12,15 @@ module.exports = {
       extends: ["plugin:itgalaxy/module"],
       // Exclude nested tests
       excludedFiles: ["**/__tests__/**/*", "**/__mocks__/**/*", "**/*.md"],
-      files: ["src/**/*"]
+      files: ["src/**/*"],
+      rules: {
+        // Allow to use ES module syntax
+        // You should use babel if your node version is not supported ES syntax module, dynamic loading ES modules or other features
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          { ignores: ["modules", "dynamicImport"] }
+        ]
+      }
     },
 
     // Jest
@@ -21,6 +29,12 @@ module.exports = {
       excludedFiles: ["**/*.md"],
       files: ["**/__tests__/**/*", "**/__mocks__/**/*"],
       rules: {
+        // Test can be written with using ES module syntax or CommonJS module syntax
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          { ignores: ["modules", "dynamicImport"] }
+        ],
+
         // Allow to use `console` (example - `mocking`)
         "no-console": "off"
       }
@@ -37,10 +51,14 @@ module.exports = {
       rules: {
         "no-unused-vars": "off",
         "no-console": "off",
-        "import/extensions": "off",
         "import/no-unresolved": "off",
         "node/no-unpublished-require": "off",
-        "node/no-unpublished-import": "off"
+        "node/no-unpublished-import": "off",
+        // Documentation files can contain ES module syntax and CommonJS module syntax
+        "node/no-unsupported-features/es-syntax": [
+          "error",
+          { ignores: ["modules", "dynamicImport"] }
+        ]
       }
     }
   ],
