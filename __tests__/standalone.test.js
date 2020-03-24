@@ -14,9 +14,9 @@ describe("standalone", () => {
         policy: [
           {
             allow: "/",
-            userAgent: "Google"
-          }
-        ]
+            userAgent: "Google",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -27,9 +27,9 @@ describe("standalone", () => {
         policy: [
           {
             allow: ["/", "/foobar"],
-            userAgent: "Google"
-          }
-        ]
+            userAgent: "Google",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -40,9 +40,9 @@ describe("standalone", () => {
         policy: [
           {
             disallow: ["/", "/foobar"],
-            userAgent: "Google"
-          }
-        ]
+            userAgent: "Google",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -53,13 +53,13 @@ describe("standalone", () => {
         policy: [
           {
             allow: "/",
-            userAgent: "Google"
+            userAgent: "Google",
           },
           {
             allow: "/",
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -71,14 +71,14 @@ describe("standalone", () => {
           {
             allow: "/",
             disallow: "/search-foo",
-            userAgent: "Google"
+            userAgent: "Google",
           },
           {
             allow: "/",
             disallow: "/search-bar",
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -90,14 +90,14 @@ describe("standalone", () => {
           {
             allow: "/",
             disallow: "/search-foo",
-            userAgent: ["Google", "AnotherBot"]
+            userAgent: ["Google", "AnotherBot"],
           },
           {
             allow: "/",
             disallow: "/search-bar",
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -109,9 +109,9 @@ describe("standalone", () => {
           {
             allow: "/корзина",
             disallow: "/личный-кабинет",
-            userAgent: "Google"
-          }
-        ]
+            userAgent: "Google",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -119,7 +119,7 @@ describe("standalone", () => {
   it("should throw error if the `policy` option is string", async () => {
     await expect(
       generateRobotstxt({
-        policy: "string"
+        policy: "string",
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -127,7 +127,7 @@ describe("standalone", () => {
   it("should throw error if the `policy` option is null", async () => {
     await expect(
       generateRobotstxt({
-        policy: null
+        policy: null,
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -135,7 +135,7 @@ describe("standalone", () => {
   it("should throw error if the `policy` option not have the `userAgent` option", async () => {
     await expect(
       generateRobotstxt({
-        policy: [{}]
+        policy: [{}],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -145,9 +145,9 @@ describe("standalone", () => {
       generateRobotstxt({
         policy: [
           {
-            userAgent: []
-          }
-        ]
+            userAgent: [],
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -155,7 +155,7 @@ describe("standalone", () => {
   it("should contain the `Sitemap` directive", async () => {
     await expect(
       generateRobotstxt({
-        sitemap: "http://foobar.com/sitemap.xml"
+        sitemap: "http://foobar.com/sitemap.xml",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -163,7 +163,7 @@ describe("standalone", () => {
   it("should throw error if the `sitemap` option is not string or array", async () => {
     await expect(
       generateRobotstxt({
-        sitemap: {}
+        sitemap: {},
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -171,7 +171,7 @@ describe("standalone", () => {
   it("should throw error if the `sitemap` option is not absolute URL", async () => {
     await expect(
       generateRobotstxt({
-        sitemap: "sitemap.xml"
+        sitemap: "sitemap.xml",
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -179,7 +179,7 @@ describe("standalone", () => {
   it("should throw error if item in the `sitemap` option not an absolute URL", async () => {
     await expect(
       generateRobotstxt({
-        sitemap: ["sitemap.xml"]
+        sitemap: ["sitemap.xml"],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -187,7 +187,7 @@ describe("standalone", () => {
   it("should throw error if item in the `sitemap` option not a string or an array", async () => {
     await expect(
       generateRobotstxt({
-        sitemap: [{}]
+        sitemap: [{}],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -197,8 +197,8 @@ describe("standalone", () => {
       generateRobotstxt({
         sitemap: [
           "http://foobar.com/sitemap.xml",
-          "http://foobar.com/sitemap1.xml"
-        ]
+          "http://foobar.com/sitemap1.xml",
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -206,7 +206,7 @@ describe("standalone", () => {
   it("should `contain the `Host`", async () => {
     await expect(
       generateRobotstxt({
-        host: "http://domain.com"
+        host: "http://domain.com",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -214,7 +214,7 @@ describe("standalone", () => {
   it("should contain the `Host` without a trailing slash", async () => {
     await expect(
       generateRobotstxt({
-        host: "http://domain.com/"
+        host: "http://domain.com/",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -222,7 +222,7 @@ describe("standalone", () => {
   it("should contain the `Host` in punycode format", async () => {
     await expect(
       generateRobotstxt({
-        host: "интернет-магазин.рф"
+        host: "интернет-магазин.рф",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -230,7 +230,7 @@ describe("standalone", () => {
   it("should contain the `Host` without `80` port", async () => {
     await expect(
       generateRobotstxt({
-        host: "domain.com:80"
+        host: "domain.com:80",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -238,7 +238,7 @@ describe("standalone", () => {
   it("should contain the `Host` if `host` options without protocol scheme", async () => {
     await expect(
       generateRobotstxt({
-        host: "www.domain.com"
+        host: "www.domain.com",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -246,7 +246,7 @@ describe("standalone", () => {
   it("should throw error on invalid `host` option", async () => {
     await expect(
       generateRobotstxt({
-        host: "?:foobar"
+        host: "?:foobar",
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -254,7 +254,7 @@ describe("standalone", () => {
   it("should throw error if the `host` option being IP address version 4", async () => {
     await expect(
       generateRobotstxt({
-        host: "127.0.0.1"
+        host: "127.0.0.1",
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -262,7 +262,7 @@ describe("standalone", () => {
   it("should throw error if the `host` option being IP address version 6", async () => {
     await expect(
       generateRobotstxt({
-        host: "0:0:0:0:0:0:7f00:1"
+        host: "0:0:0:0:0:0:7f00:1",
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -270,7 +270,7 @@ describe("standalone", () => {
   it("should contain the `Host` with `https` scheme", async () => {
     await expect(
       generateRobotstxt({
-        host: "https://domain.com"
+        host: "https://domain.com",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -278,7 +278,7 @@ describe("standalone", () => {
   it("should contain the `Host` without any extra URL entire", async () => {
     await expect(
       generateRobotstxt({
-        host: "http://www.domain.com:8080/foo/bar/foobar.php?foo=bar#foobar"
+        host: "http://www.domain.com:8080/foo/bar/foobar.php?foo=bar#foobar",
       })
     ).resolves.toMatchSnapshot();
   });
@@ -286,7 +286,7 @@ describe("standalone", () => {
   it("should throw error if the `Host` option is array", async () => {
     await expect(
       generateRobotstxt({
-        host: ["http://domain.com", "http://domain1.com"]
+        host: ["http://domain.com", "http://domain1.com"],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -298,14 +298,14 @@ describe("standalone", () => {
           {
             allow: "/",
             crawlDelay: 10,
-            userAgent: "Google"
+            userAgent: "Google",
           },
           {
             allow: "/",
             crawlDelay: 0.5,
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -317,9 +317,9 @@ describe("standalone", () => {
           {
             allow: "/",
             crawlDelay: "foo",
-            userAgent: "Google"
-          }
-        ]
+            userAgent: "Google",
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -331,9 +331,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: "s /forum/showthread.php",
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -346,11 +346,11 @@ describe("standalone", () => {
             allow: "/",
             cleanParam: [
               "s /forum/showthread.php",
-              "ref /forum/showthread.php"
+              "ref /forum/showthread.php",
             ],
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -362,9 +362,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: new Array(502).join("a"),
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -376,9 +376,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: [new Array(502).join("a")],
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -390,9 +390,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: {},
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -404,9 +404,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: [{}],
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).rejects.toThrowErrorMatchingSnapshot();
   });
@@ -414,7 +414,7 @@ describe("standalone", () => {
   it("config option", async () => {
     await expect(
       generateRobotstxt({
-        configFile: path.join(fixturesPath, "robots-txt.config.js")
+        configFile: path.join(fixturesPath, "robots-txt.config.js"),
       })
     ).resolves.toMatchSnapshot();
   });
@@ -422,7 +422,7 @@ describe("standalone", () => {
   it("should throw error if config don't found", async () => {
     await expect(
       generateRobotstxt({
-        configFile: path.join(fixturesPath, "not-found.config.js")
+        configFile: path.join(fixturesPath, "not-found.config.js"),
       })
     ).rejects.toThrow(/no such file or directory/);
   });
@@ -446,14 +446,14 @@ describe("standalone", () => {
           {
             allow: "",
             disallow: "",
-            userAgent: "*"
+            userAgent: "*",
           },
           {
             allow: "",
             disallow: [""],
-            userAgent: "Foo"
-          }
-        ]
+            userAgent: "Foo",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });
@@ -465,9 +465,9 @@ describe("standalone", () => {
           {
             allow: "/",
             cleanParam: [],
-            userAgent: "Yandex"
-          }
-        ]
+            userAgent: "Yandex",
+          },
+        ],
       })
     ).resolves.toMatchSnapshot();
   });

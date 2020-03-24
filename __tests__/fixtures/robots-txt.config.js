@@ -1,3 +1,3 @@
 module.exports = {
-  host: "http://some-some-domain.com"
+  host: "http://some-some-domain.com",
 };

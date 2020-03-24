@@ -12,7 +12,7 @@ function addLine(name, rule) {
   let contents = "";
 
   if (rule && Array.isArray(rule) && rule.length > 0) {
-    rule.forEach(item => {
+    rule.forEach((item) => {
       contents += addLine(name, item);
     });
   } else {
@@ -73,7 +73,7 @@ function buildConfig(configFile = null) {
     ? configExplorer.load(configPath)
     : configExplorer.search(searchPath);
 
-  return searchForConfig.then(result => {
+  return searchForConfig.then((result) => {
     if (!result) {
       return {};
     }
@@ -82,28 +82,28 @@ function buildConfig(configFile = null) {
   });
 }
 
-export default function({
+export default function ({
   configFile = null,
   policy = [
     {
       allow: "/",
       cleanParam: null,
       crawlDelay: null,
-      userAgent: "*"
-    }
+      userAgent: "*",
+    },
   ],
   sitemap = null,
-  host = null
+  host = null,
 } = {}) {
   let options = {
     host,
     policy,
-    sitemap
+    sitemap,
   };
 
   return Promise.resolve()
     .then(() =>
-      buildConfig(configFile).then(result => {
+      buildConfig(configFile).then((result) => {
         // Need avoid this behaviour in next major release
         // Load config file when it is passed or options were set
         options = Object.assign({}, options, result.config);
@@ -113,13 +113,13 @@ export default function({
     )
     .then(
       () =>
-        new Promise(resolve => {
+        new Promise((resolve) => {
           if (options.policy) {
             if (!Array.isArray(options.policy)) {
               throw new Error("Options `policy` must be array");
             }
 
-            options.policy.forEach(item => {
+            options.policy.forEach((item) => {
               if (!item.userAgent || item.userAgent.length === 0) {
                 throw new Error(
                   "Each `policy` should have a single string `userAgent` option"
@@ -145,7 +145,7 @@ export default function({
                     "Option `cleanParam` should have no more than 500 characters"
                   );
                 } else if (Array.isArray(item.cleanParam)) {
-                  item.cleanParam.forEach(subItem => {
+                  item.cleanParam.forEach((subItem) => {
                     if (typeof subItem === "string" && subItem.length > 500) {
                       throw new Error(
                         "String in `cleanParam` option should have no more than 500 characters"
@@ -177,7 +177,7 @@ export default function({
             ) {
               throw new Error("Option `sitemap` should be an absolute URL");
             } else if (Array.isArray(options.sitemap)) {
-              options.sitemap.forEach(item => {
+              options.sitemap.forEach((item) => {
                 if (typeof item === "string" && !isAbsoluteUrl(item)) {
                   throw new Error(
                     "Item in `sitemap` option should be an absolute URL"
@@ -239,7 +239,7 @@ export default function({
                   : parsedURL.host,
               port:
                 parsedURL.port && parsedURL.port === "80" ? "" : parsedURL.port,
-              protocol: parsedURL.protocol
+              protocol: parsedURL.protocol,
             });
 
             formattedHost = formattedHost.replace(/^http:\/\//, "");

@@ -16,9 +16,9 @@ const cli = meow(
   {
     flags: {
       config: {
-        type: "string"
-      }
-    }
+        type: "string",
+      },
+    },
   }
 );
 
@@ -38,8 +38,8 @@ if (cli.flags.config) {
 
 Promise.resolve()
   .then(() => Object.assign({}, optionsBase))
-  .then(options => standalone(options))
-  .then(output => {
+  .then((options) => standalone(options))
+  .then((output) => {
     if (cli.input.length === 0) {
       throw new Error("Require `dest` argument");
     }
@@ -48,7 +48,7 @@ Promise.resolve()
 
     return Promise.resolve().then(() => fs.outputFile(dest, output));
   })
-  .catch(error => {
+  .catch((error) => {
     console.log(error); // eslint-disable-line no-console
     process.exit(error.code || 1);
   });

@@ -24,31 +24,31 @@ robotstxt({
       userAgent: "Googlebot",
       allow: "/",
       disallow: "/search",
-      crawlDelay: 2
+      crawlDelay: 2,
     },
     {
       userAgent: "OtherBot",
       allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
       disallow: ["/admin", "/login"],
-      crawlDelay: 2
+      crawlDelay: 2,
     },
     {
       userAgent: "*",
       allow: "/",
       disallow: "/search",
       crawlDelay: 10,
-      cleanParam: "ref /articles/"
-    }
+      cleanParam: "ref /articles/",
+    },
   ],
   sitemap: "http://example.com/sitemap.xml",
-  host: "http://example.com"
+  host: "http://example.com",
 })
-  .then(content => {
+  .then((content) => {
     console.log(content);
 
     return content;
   })
-  .catch(error => {
+  .catch((error) => {
     throw error;
   });
 ```
@@ -64,24 +64,24 @@ module.exports = {
       userAgent: "Googlebot",
       allow: "/",
       disallow: ["/search"],
-      crawlDelay: 2
+      crawlDelay: 2,
     },
     {
       userAgent: "OtherBot",
       allow: ["/allow-for-all-bots", "/allow-only-for-other-bot"],
       disallow: ["/admin", "/login"],
-      crawlDelay: 2
+      crawlDelay: 2,
     },
     {
       userAgent: "*",
       allow: "/",
       disallow: "/search",
       crawlDelay: 10,
-      cleanParam: "ref /articles/"
-    }
+      cleanParam: "ref /articles/",
+    },
   ],
   sitemap: "http://example.com/sitemap.xml",
-  host: "http://example.com"
+  host: "http://example.com",
 };
 ```
 

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [8.0.2](https://github.com/itgalaxy/generate-robotstxt/compare/v8.0.1...v8.0.2) (2020-03-24)
+
+### Chore
+
+* update deps
+
 ## [8.0.1](https://github.com/itgalaxy/generate-robotstxt/compare/v8.0.0...v8.0.1) (2020-02-19)
 
 ### Chore

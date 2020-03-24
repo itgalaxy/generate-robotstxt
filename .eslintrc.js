@@ -4,7 +4,7 @@ module.exports = {
   extends: [
     "plugin:itgalaxy/script",
     "plugin:itgalaxy/esnext",
-    "plugin:itgalaxy/node"
+    "plugin:itgalaxy/node",
   ],
   overrides: [
     // Source
@@ -18,9 +18,9 @@ module.exports = {
         // You should use babel if your node version is not supported ES syntax module, dynamic loading ES modules or other features
         "node/no-unsupported-features/es-syntax": [
           "error",
-          { ignores: ["modules", "dynamicImport"] }
-        ]
-      }
+          { ignores: ["modules", "dynamicImport"] },
+        ],
+      },
     },
 
     // Jest
@@ -32,12 +32,12 @@ module.exports = {
         // Test can be written with using ES module syntax or CommonJS module syntax
         "node/no-unsupported-features/es-syntax": [
           "error",
-          { ignores: ["modules", "dynamicImport"] }
+          { ignores: ["modules", "dynamicImport"] },
         ],
 
         // Allow to use `console` (example - `mocking`)
-        "no-console": "off"
-      }
+        "no-console": "off",
+      },
     },
 
     // Markdown
@@ -45,7 +45,7 @@ module.exports = {
       extends: [
         // Documentation files can contain ECMA and CommonJS modules
         "plugin:itgalaxy/dirty",
-        "plugin:itgalaxy/markdown"
+        "plugin:itgalaxy/markdown",
       ],
       files: ["**/*.md"],
       rules: {
@@ -57,10 +57,10 @@ module.exports = {
         // Documentation files can contain ES module syntax and CommonJS module syntax
         "node/no-unsupported-features/es-syntax": [
           "error",
-          { ignores: ["modules", "dynamicImport"] }
-        ]
-      }
-    }
+          { ignores: ["modules", "dynamicImport"] },
+        ],
+      },
+    },
   ],
-  root: true
+  root: true,
 };
