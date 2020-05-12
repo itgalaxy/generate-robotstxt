@@ -129,7 +129,7 @@ export default function ({
               if (
                 item.crawlDelay &&
                 typeof item.crawlDelay !== "number" &&
-                !isFinite(item.crawlDelay)
+                !Number.isFinite(item.crawlDelay)
               ) {
                 throw new Error(
                   "Option `crawlDelay` must be an integer or a float"
