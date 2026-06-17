@@ -38,6 +38,10 @@ function generatePoliceItem(item, index) {
 
   contents += addLine("User-agent", item.userAgent);
 
+  if (item.contentSignal) {
+    contents += addLine("Content-signal", item.contentSignal);
+  }
+
   if (item.allow) {
     contents += addLine("Allow", item.allow);
   }
@@ -134,6 +138,13 @@ export default function ({
                 throw new Error(
                   "Option `crawlDelay` must be an integer or a float"
                 );
+              }
+
+              if (
+                item.contentSignal &&
+                typeof item.contentSignal !== "string"
+              ) {
+                throw new Error("Option `contentSignal` should be a string");
               }
 
               if (item.cleanParam) {

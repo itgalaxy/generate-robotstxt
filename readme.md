@@ -34,6 +34,7 @@ robotstxt({
     },
     {
       userAgent: "*",
+      contentSignal: "search=yes, ai-input=yes, ai-train=no",
       allow: "/",
       disallow: "/search",
       crawlDelay: 10,
@@ -74,6 +75,7 @@ module.exports = {
     },
     {
       userAgent: "*",
+      contentSignal: "search=yes, ai-input=yes, ai-train=no",
       allow: "/",
       disallow: "/search",
       crawlDelay: 10,
