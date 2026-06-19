@@ -47,6 +47,34 @@ describe("standalone", () => {
     ).resolves.toMatchSnapshot();
   });
 
+  it("should contain the `Content-signal` directive", async () => {
+    await expect(
+      generateRobotstxt({
+        policy: [
+          {
+            contentSignal: "search=yes, ai-input=yes, ai-train=no",
+            userAgent: "*",
+          },
+        ],
+      })
+    ).resolves.toBe(`User-agent: *
+Content-signal: search=yes, ai-input=yes, ai-train=no
+`);
+  });
+
+  it("should throw error if the `contentSignal` option is not string", async () => {
+    await expect(
+      generateRobotstxt({
+        policy: [
+          {
+            contentSignal: {},
+            userAgent: "*",
+          },
+        ],
+      })
+    ).rejects.toThrow("Option `contentSignal` should be a string");
+  });
+
   it("should contain two `policy` item with the `Allow` directive", async () => {
     await expect(
       generateRobotstxt({
